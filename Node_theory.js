@@ -99,6 +99,23 @@ console.log('end of the file')
 
 /*event loop - это цикл событий. Более подробно про это можно почитать в асинхронности JS. 
 В Ноде используется async/await и promises для упрощения организации асинхронности.*/
+
+/*Улучшение кода на ноде для избегания callback hell и отлова ошибок:*/
+
+/*
+1. Don't nest functions. Give them names and place them at the top level of your program.
+
+2. Use function hoisting to your advantage to move functions 'below the fold'.
+
+3. Handle every single error in every one of your callbacks. 
+Use a linter like standard to help you with this.
+
+4. Create reusable functions and place them in a module to reduce the cognitive load 
+required to understand your code. 
+Splitting your code into small pieces like this also helps you handle errors, 
+write tests, forces you to create a stable and documented public 
+API for your code, and helps with refactoring.*/
+
 -------------------------------------------------------------------------------------------------------
 
 
