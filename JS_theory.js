@@ -305,6 +305,7 @@ Event listeners
 
 async () и await функции.
 /*Это синтаксический сахар для удобства. Можно и на промисах то же самое делать.
+Эти команды компилируются в промис перед запуском при помощи babel
 
 Async перед функцией означает, что она вернет промис. 
 Промис с результатом, который мы передаем в ретурн. 
@@ -353,6 +354,21 @@ for (item of someArray) {
 }
 
 //Либо через специальные библиотеки.
+
+//В асинхронных функциях обязательно нужно отлавливать ошибки.
+//Для этого оборачиваем их в блок try/catch
+async function fetchUrl () {
+    console.log('Fetch started')
+    try {
+        const response = await fetch(url)
+        const data = await response.json()
+        console.log('Data: ', data)
+    } catch (e) {
+        console.error(e)
+    } finally {
+        console.log('Program ends')
+    }
+}
 
 --------------------------------
 
