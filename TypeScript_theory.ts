@@ -37,11 +37,23 @@ variable: Array<number> - другая запись того же самого
 
 Tuple - массив из рзных типов данных, записывается как
 variable: [string, number]
+По-русски это кортеж.
 
 Any - означает, что переменная будет иметь динамическую типизацию, то есть ей можно 
 присваивать любой тип данных.
 variable: any
-*/
+
+Проверить тип данных можно так же как в JS при помощи команды typeof. На его основе
+строится type guard.*/
+
+/*Приведение типов данных (type assertion).
+Когда тип данных неопределен, либо указан тип any, либо type определен как смешанный,
+то в случае необходимости приветси данных к одному типу, используется:*/ 
+let someValue: any = 'Hello TypeScript!'
+
+let length: number = (<string>someValue).length
+//либо
+let length: number = (someValue as string).length
 
 ------------------------------
 
@@ -165,6 +177,12 @@ function infinite (): never {
 	}
 }
 
+//Тип функции указыватся при выражении функции через переменную.
+let myAdd: (x:number, y:number) => number //описание типа
+=
+function(x: number, y: number): number { return x + y }
+
+
 //Значения параметров по умолчанию задаются следюущим образом:
 function getName(firstName: string, lastName: string="Иванов") {
     return firstName + " " + lastName;
@@ -182,8 +200,9 @@ let result = addNumbers(1, 4, 77, 55, 12) //все аргументы после
 их под одинаковым именем. Такая функция sum будет складывать строки и числа
 в зависимости от того, какие данные получит.*/
 
-function add(x: string, y: string): string;
-function add(x: number, y: number): number;
+function add(x: string, y: string): string //задаем вариант вызова, без действий
+function add(x: number, y: number): number //задаем вариант вызова, без действий
+
 function add(x: any, y: any): any {
     return x + y;
 }
@@ -193,6 +212,37 @@ function add(x: any, y: any): any {
 function myMethod(a: string | number) { //a либо строка либо число.
     //some code
 }
+
+------------------------------------
+
+//Более сложный тип перегрузки функции:
+//Создадим интерфейс
+interface MyPosition {
+	x: number | undefined
+	y: number | undefined
+}
+//И еще один на его основе с дополнительным параметром
+interface MyPositionWithDefault extends MyPosition {
+	default: string
+}
+
+//Определяем возможные варианты вызова функции position
+function position(): MyPosition //задаем вариант вызова, без действий
+function position(a: number): MyPositionWithDefault //задаем вариант вызова, без действий
+function position(a: number, b: number): MyPosition //задаем вариант вызова, без действий
+//Теперь задаем саму функцию
+function position (a?: number, b?: number) {
+	if (!a && !b) { //если параметры не заданы
+		return {x: undefined, y: undefined} //возвращаем параметры для интерфейса
+	}
+
+	if (a && !b) {
+		return {x: a, y: undefined, default: a.toString()}
+	}
+
+	return {x: a, y: b}
+}
+//тепер ьмы можем вызывать position хоть вообще без параметров, хоть с двумя.
 
 ====================================================================================================
 
@@ -256,32 +306,99 @@ interface IFullNameBuilder {
     (name: string, surname: string): string;
 }
 
+====================================================================================================
+
+КЛАССЫ
+
+/*Базовый функционал такой же, как и в JS. Везде следует указывать типы:*/
+class User {
+    static id: number = 1 //статическое свойство
+    name: string
+    constructor(userId: number, userName: string) {
+        this.id = userId
+        this.name = userName
+    }
+    getInfo(): string {
+        return "id:" + this.id + " name:" + this.name
+    }
+}
+
+/*В TS у классов есть модификаторы доступа. Это public, protected и private.
+Если не указан никакой модификатор, то он по умолчанию расценивается как public.*/
+class User {
+	public id: number
+	public password: number | string
+}
+
+Private
+//К такому свойству или функции нельзя будет обратиться извне. Также к нему нельзя обратиться
+//при создании класса-потомка. К private можно обратиться только внутри самого класса.
+class User {
+	private _id: number
+	private displayID: void () {
+		console.log(this.id)
+	}
+}
+let Jack = new User
+Jack.displayID() //error
+
+Protected
+//Схож со вторым, так как к нему тоже нельзя обращаться извне. Но из классов-потомков - можно.
+//То есть при создании класса на его основе в конструкторе можно использовать это свойство.
 
 
+//Еще одна приятная особенность модификаторов - то, что с их помощью можно скоращать код.
+//Если передать их в параметры конструктора класса, то можно существенно упростить код.
+//Было:
+class User {
+	public id: number
+	public password: number
+
+	constructor(userId: number, userPassword: number){
+		this.id = userId
+		this.password = userPassword
+	}
+}
+//Стало:
+class User {
+	constructor(public userId: number, public userPassword: number){
+	}
+}
 
 
+//Здесь так же можно сделать конструкцию с get, set
+class User {
+	private _name: string;
+
+	public get name(): string {
+	    return this._name;
+	}
+
+	public set name(n: string) {
+	    this._name = n;
+	}
+}
 
 
+Абстрактные классы
+/*Классы это важная часть ООП в TS. Абстрактные класс отличаются от обычных тем, что
+с их помощью напрямую нельзя создать объект. Задаются при помощи ключевого слова*/
+abstract class {}
+/*Это как класс "геометрическая фигура", ее нет в реальности, но она может задавать набор
+методов для всех дочерных классов.
+Эти методы лучше задавать как абстрактные методы при помощи ключевого слова abstract, 
+так как они неприменимы к самому классу, а лишь только к его потомкам.*/
+abstract class Figure {
+    abstract getArea(): void;
+}
+//Все остальные классы создаются на основе абстрактного при помощи extends.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+readonly
+//Используется как свойство-константа. При компиляции программа понимает, что 
+//данное свойство не будет перезаписываться.
+class NewClass {
+	readonly x: number = 3
+}
 
 
 
