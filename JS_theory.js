@@ -1097,7 +1097,7 @@ console.log(userData.find(user => user.id === 2))
 //и при частом вызове.
 //Упрощаем.
 
-const index {}
+const index = {}
 userData.forEach(item => index[item.id] = item)
 //Благодаря этому мы создаем объект, где ключами являются айдишник, а свойствами -
 //объекты из массива.
@@ -1106,7 +1106,24 @@ userData.forEach(item => index[item.id] = item)
 //Запроксируем класс, в который будет передаваться массив
 const IndexedArray = new Proxy (Array, {
     construct(target, [args]) {
-        return new target(...args)
+        //Создадим в прокси точно такой же index
+        const index = {}
+        args.forEach(item => index[item.id] = item)
+
+        return new Proxy(new target(...args), {
+            get: (arr, prop) => {
+                switch (prop) {
+                    case 'push': return item => {
+                        index[item.id] = item
+                        //продублируем функционал
+                        arr[prop].call(arr, item)
+                    }
+                    case 'findById': return id => index[id]
+                    default: return arr[prop]
+                }
+
+            }
+        })
     }
 })
 
@@ -1118,7 +1135,7 @@ const users = new IndexedArray([
     {id: 4, name: 'Vladimir', job: 'Scientist', age: 24},
     {id: 5, name: 'AlexP', job: 'DataEngeneer', age: 24}
     ])
-
+//И он сразуоборачивается в прокси.
 
 --------------------------------
 
