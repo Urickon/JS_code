@@ -2782,12 +2782,14 @@ class SimpleMembership {
         this.cost = 50
     }
 }
+
 class StandartMembership {
     constructor (name) {
         this.name = name
         this.cost = 150
     }
 }
+
 class PremiumMembership {
     constructor (name) {
         this.name = name
