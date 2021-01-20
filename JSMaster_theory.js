@@ -735,6 +735,195 @@ registry.register('Yury', 'product', 'error occured')
 
 ----------------------------------------------------------------
 
+Flyweight
+/*Очень часто применяемый паттерн. Он заключается в создании объектов-легковесов, которые могут применяться 
+в разных комбинациях. Делается это для того, чтобы экономить память, так как такие объекты достаточно загрузить
+всего лишь раз.
+Часто используется вместе с фабрикой. Помогает определить, есть ли подобный объект в списке или еще нет.
+
+Плюс в том, что экономится память. Минус в том, что расходуется процессорное время на выполнение кода.
+Особенно актуален при подгрузке видео или изображений, которые повторяются.*/
+
+class Car {
+	constructor (model) {
+		this.model = model
+	}
+}
+
+class Factory {
+	constructor() {
+		this.cars = []
+	}
+
+	create (model) {
+		const candidate = this.getCar(model)
+		if (candidate) {
+			console.log('You already have the same car!')
+			return 
+		} else {
+			const newCar = new Car (model)
+			this.cars.push(newCar)
+			console.log(`${newCar} added!`)
+			return newCar
+		}
+
+	}
+
+	getCar (model) {
+		return this.cars.find(car => car.model === model)
+	}
+}
+
+//Создаю фабрику
+const factory = new Factory
+
+factory.create('bmw') //bmw added!
+factory.create('lada') //lada added!
+factory.create('bmw') //You already have 'bmw'
+
+//Таким образом, если машина такой марки есть, мы не тратим память на создание дубликата.
+
+----------------------------------------------------------------
+
+Proxy
+/*Иначе называется заместитель. Суть прокси в том, что он позволяет перехватывать вызовы к объекту,
+делая что-либо до или после передачи вызова оригиналу.*/
+
+function networkFetch(url) {
+	return `${url}: response from server.`
+}
+
+const cache = new Set()
+
+//Создадим прокси для функции
+const proxiedFetch = new Proxy (networkFetch, {
+	apply(target, thisArg, args) {
+		const url = args[0]
+		if (cache.has(url)) {
+			return `${url}: response from cache.`
+		} else {
+			cache.add(url)
+			return Reflect.apply(target, thisArg, args)
+		}
+	}
+})
+
+console.log(proxiedFetch('inistrad.com'))
+console.log(proxiedFetch('atama.ru'))
+console.log(proxiedFetch('inistrad.com'))
+
+//Таким образом, здесь мы при помощи прокси не делаем лишних запросов.
+
+----------------------------------------------------------------
+
+//=========================== Behaviour Design Patterns ===============================
+
+Chain of responsibility
+/*Довольно простой паттерн, по-русски звучит как цепочка обязанностей.
+Удобно, например, чтобы организовать цепочку проверок. Если хотя бы одно звено ложное - то процесс прервется.
+Активно используется в jquery.*/
+
+class MySum {
+	constructor (initialValue = 0) {
+		this.sum = initialValue
+	}
+
+	add (value) {
+		this.sum += value
+		return this //обязательно для поддерки chain of responsibility
+	}
+}
+
+const summarizer = new MySum()
+console.log(summarizer.add(8).add(9).add(122).sum) //собственно реализация метода.
+
+----------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
