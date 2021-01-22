@@ -956,7 +956,7 @@ class User {
 	}
 
 	message (message, to) {
-		this.room.send(message, this, to) //this is method from mediator***
+		this.room.send(message, this, to) //method from mediator***
 	}
 
 	receive (message, from) {
@@ -972,7 +972,7 @@ class ChatRoom {
 
 	register (user) {
 		this.users[user.name] = user
-		user.room = this
+		user.room = this //Собственно добавляет юзеру этот ChatRoom
 	}
 
 	send(message, from, to) { //***
@@ -988,7 +988,7 @@ class ChatRoom {
 	}
 }
 
-//Теперь создадим полльзователей:
+//Теперь создадим пользователей:
 const uriy = new User('Uriy')
 const yulia = new User('Yulia')
 const oleg = new User('Oleg')
@@ -1004,6 +1004,8 @@ room.register(oleg)
 uriy.message('Hello!', yulia) //From Uriy to Yulia: Hello!
 yulia.message('Hey!', uriy) //From Yulia to Uriy: Hey!
 oleg.message('Hello!') //From Oleg to Uriy: Hello everybody!  //From Oleg to Yulia: Hello everybody!
+
+//По факту мы теперь отправляем сообщение (метод message) через ChatRoom.
 
 ----------------------------------------------------------------
 
