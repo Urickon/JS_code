@@ -936,26 +936,76 @@ for (let value of iterator) {
 //продемонстрировать работу паттерна. Если бы у массива итератора не было, то мы бы не загромождали его этим методом,
 //а реализовали бы через отдельный класс.
 
+----------------------------------------------------------------
 
+Mediator
+/*Посредник. Применяется, когда есть множество объектов, которые должны друг с другом взаимодействовать. 
+При этом я не хочу, чтобы объекты явно ссылались друг на друга, так как это приведет к тому, что их невозможно
+станет использовать в других частях приложения. Не стоит загромождать их связями с конкретными объектами, тем
+более разными линиями поведения в зависимости от работы с тем или иным объектом. Для этого используется посредник.
 
+Это как пилоты самолетов - если бы не было диспетчеров, то им бы приходилось самостоятельно связываться с сотнями
+других пилотов, чтобы не столкнуться. Диспетчер - это и есть медиатор.
 
+Сделаю мини-мессенджер.*/
 
+class User {
+	constructor (name) {
+		this.name = name
+		this.room = null //by default
+	}
 
+	message (message, to) {
+		this.room.send(message, this, to) //this is method from mediator***
+	}
 
+	receive (message, from) {
+		console.log(`From ${from.name} to ${this.name}: ${message}`)
+	}
+}
 
+//Create mediator
+class ChatRoom {
+	constructor () {
+		this.users = {}
+	}
 
+	register (user) {
+		this.users[user.name] = user
+		user.room = this
+	}
 
+	send(message, from, to) { //***
+		if (to) {
+			to.receive(message, from)
+		} else {
+			Object.keys(this.users).forEach(key => {
+				if (this.users[key] !== from) {
+					this.users[key].receive(message, from)
+				}
+			})
+		}
+	}
+}
 
+//Теперь создадим полльзователей:
+const uriy = new User('Uriy')
+const yulia = new User('Yulia')
+const oleg = new User('Oleg')
 
+//Создадим посредника (комнату, в которой будут находиться юзеры)
+const room = new ChatRoom()
+//Регистрируем пользователей
+room.register(uriy)
+room.register(yulia)
+room.register(oleg)
 
+//Взаимодействуем через медиатор
+uriy.message('Hello!', yulia) //From Uriy to Yulia: Hello!
+yulia.message('Hey!', uriy) //From Yulia to Uriy: Hey!
+oleg.message('Hello!') //From Oleg to Uriy: Hello everybody!  //From Oleg to Yulia: Hello everybody!
 
-
-
-
-
-
-
-
+----------------------------------------------------------------
 
 
 
