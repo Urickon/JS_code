@@ -1091,30 +1091,202 @@ observable.fire('DECREMENT') //3 8 2
 
 ----------------------------------------------------------------
 
+State
+/*По-русски это называется "состояние". Основная идея в том, что программа может находиться в нескольких
+состояниях, которые сменяют друг друга. Находясь в разных состояниях, программа по разному будет реагировать 
+на одни и те же действия.
 
+Например, Документ, обладая условно одинковым наполнением, может принимать три состояния - черновик, модерация,
+опубликован. В каждом из этих состояний метод publish() будет работать поразному. ДЛя черновика он должен перевести
+документ в состояние moderated, для moderated опубликовать, а для published сказать, что данный документ
+уже опубликован.
 
+Проблема в том, что таких состояний может быть гораздо больше. И тогда прописывать действия для них в
+самом классе Документ будет проблематично, так как такой код будет очень трудно поддерживать.
 
+Паттерн состояние предлагает создать отдельные классы с общим интерфейсом для каждого состояния. Благодаря
+общему интерфейсу, Документ сможет не привязываться напрямую к классу состояния. Поведение Документа можно
+будет изменить в любой момент, подключив к нему другое состояние.*/
 
+//Родительский класс для состояний
+class Status {
+	constructor(status) {
+		this.status = status
+	}
+}
 
+//На его основе создаем любое количество состояний
+class Draft extends Status {
+	constructor() {
+		super('draft')
+	}
 
+	viewStatus() {
+		console.log(`Document is a ${this.status}`)
+	}
 
+	publish() {
+		console.log('Modifying Doc...')
+		console.log('Process finished!')
+	}
+}
 
+class Modified extends Status {
+	constructor() {
+		super('modified')
+	}
 
+	viewStatus() {
+		console.log(`Document is ${this.status}`)
+	}
 
+	publish() {
+		console.log('Publishing Doc...')
+		console.log('Process finished!')
+	}
+}
 
+class Published extends Status {
+	constructor() {
+		super('published')
+	}
 
+	viewStatus() {
+		console.log(`Document is ${this.status}`)
+	}
 
+	publish() {
+		console.log('Already published!')
+	}
+}
 
+let statesArray = new Array(new Draft(), new Modified(), new Published())
 
+//Теперь, собственно, сам Документ
+class Document {
+	constructor() {
+		this.states = statesArray //Это я сделал, чтобы при добавлении новых состояний не менять Документ
+		this.currentState = this.states[0]
+	}
 
+	change() { //Этот метод будет менять текущее состояние Документа при использовании publish()
+		const total = this.states.length
+		let index = this.states.findIndex(status => status === this.currentState)
 
+		if (index + 1 < total) {
+			this.currentState = this.states[index + 1]
+		} 
+	}
 
+	edit() { //Этот метод будет приводить Документ в состояние черновика, если мы захотим его снова изменить
+		this.currentState = this.states[0]
+	}
 
+	status() { //Этот метод будет показывать текцщее состояние Документа
+		return this.currentState.viewStatus() //собственно ради этого метода мы и вводили классы состояний,
+		//иначе его бы пришлось расписать через условия (стал бы раздутым)
+	}
 
+	publish() { //Этот метод изменяет состояние документа опять же через общий интерфейс
+		this.currentState.publish() //передаем нужное действие в класс состояния
+		return this.change() //меняем состояние Документа
+	}
+}
 
+//Теперь, как все это работает:
+const doc = new Document()
 
+doc.status() //Document is a draft
 
+doc.publish() //Modifying doc... Process finished!
 
+doc.status() //Document is modified - изменился.
+
+doc.publish() //Publishing doc... Process finished!
+
+doc.status() //Document is published - изменился.
+
+doc.publish() //Already published! - больше не дает, так как в методе change() прописано условие
+
+doc.edit() //привожу в состояние черновика
+
+doc.status() //Document is a draft - все сработало! Можно публиковать по новой.
+
+----------------------------------------------------------------
+
+Strategy
+/*Стратегия. Паттерн предназначен для определения семейства алгоритмов, инкапуляции каждого из них и
+обеспечения их взаимозаменяемости. Он позволяет варьировать поведение класса путем подстановки различных
+алгоритмов.
+
+То есть мы берем схожие по действиям алгоритмы и выносим их в отдельные классы. А одинаоквый код
+оставляем в основном классе. И основному коду будет безразлично, что происходит в алгоритмах,
+так как у них обязательно должен быть единый интерфейс взаимодействия.
+Таким образом, мы инкапсулируем алгоритм и используем для взаимодействия с основным классом лишь
+один метод.
+Так, например, можно сделать навигатор, рассчитывающий время, которое займет движение из А в В
+на определенном транспортном средстве..*/
+
+class Vehicle {
+	travelTime(traffic, distance) { //единый интерфейс для взаимодействия
+		return distance / (this.speed * traffic)
+	}
+}
+
+//теперь сделаем дочерние классы для разных видов транспорта
+class Bus extends Vehicle {
+	constructor() {
+		super()
+		this.type = 'bus'
+		this.speed = 50
+	}
+}
+
+class Taxi extends Vehicle {
+	constructor() {
+		super()
+		this.type = 'taxi'
+		this.speed = 80
+	}
+}
+
+class UFO extends Vehicle {
+	constructor() {
+		super()
+		this.type = 'ufo'
+		this.speed = 2000
+	}
+}
+
+//Собственно, сам навигатор
+class Navigator {
+
+	//Сначала введу два метода, которые будут анализировать конкретный запрос от пользователя:
+	getTraffic() { //метод для анализа и получения текущей загруженности дороги
+		//Здесь алгоритм по анализу траффика, я просто выведу число (долю загруженности)
+		return 0.5
+	}
+
+	getDistance() { //метод получения расстояния (будто бы задает пользователь)
+		return 100
+	}
+
+	travel(transport) { //Это уже сам рассчет
+		let traffic = this.getTraffic()
+		let distance = this.getDistance()
+		console.log(`Travel time on ${transport.type} is ${transport.travelTime(traffic, distance)} hours`)
+	}
+
+}
+
+const nav = new Navigator()
+
+//Теперь мы можем расчитать для каждого транспорта время.
+//Плюс в том, что навигатор независим от алгоритмов и лишь передает и получает нужные данные
+
+nav.travel(new UFO()) //Travel time on ufo is 0.1 hours
+nav.travel(new Taxi()) //Travel time on ufo is 2.5 hours
+nav.travel(new Bus()) //Travel time on bus is 4 hours
 
 
 
