@@ -44,21 +44,21 @@
 он менять не может. К примеру, в JS:*/
 
 function User (name) { //функция-конструктор объекта
-    this.name = name;
-    var _age = 1; //вместо того, чтобы задавать свойство, мы вводим локальную переменную
-    this.displayInfo = function(){
-        console.log("Имя: " + this.name + "; возраст: " + _age);
-    };
-    this.getAge = function() { //это Геттер. Вызвав его, можно получить переменную.
-        return _age;
-    }
-    this.setAge = function(age) { //это сеттер, с помощью его можно менять значение _age
-        if(typeof age === "number" && age >0 && age<110){ //вводим условия
-            _age = age;
-        } else {
-            console.log("Недопустимое значение");
-        }
-    }
+	this.name = name;
+	var _age = 1; //вместо того, чтобы задавать свойство, мы вводим локальную переменную
+	this.displayInfo = function(){
+		console.log("Имя: " + this.name + "; возраст: " + _age);
+	};
+	this.getAge = function() { //это Геттер. Вызвав его, можно получить переменную.
+		return _age;
+	}
+	this.setAge = function(age) { //это сеттер, с помощью его можно менять значение _age
+		if(typeof age === "number" && age >0 && age<110){ //вводим условия
+			_age = age;
+		} else {
+			console.log("Недопустимое значение");
+		}
+	}
 }
 
 /*Смысл этого действа в том, что мы имеем больший контроль над свойством _age.
@@ -92,6 +92,7 @@ number - это число, цлое или дробное.
 В отдельную категорию вынесены большие числа. Это тип bigInt.
 Они выглядят как const bigInt = 1234567890123456789012345678901234567890n.
 Собственно, буква n в конце - это отличие.
+Также распространена "scientific notation" для записи чисел с большим количеством нулей. 100 = 10e2, 1000 = 10e3
 
 string. В некоторых языках есть специальный тип данных для одного символа, char,
 но в JS такого нет.
@@ -146,7 +147,7 @@ typeof возвращает строку с названием типа данн
 Поэтому рекомендуется проверять значение на value !== null && value !== undefined,
 чтобы не исключать '', false и 0.
 ?? помогает сделать это:
-Обычно в тернароном выражении ? означет проверку value на true/false.*/
+Обычно в тернарном выражении ? означет проверку value на true/false.*/
 value ? first : second
 //теперь же проверим value на value !== null && value !== undefined.
 value ?? first : second
@@ -161,23 +162,23 @@ value?.value2 //если value2 не определено, то получим u
 
 //Пример:
 var user = {
-    name: 'Alex',
-    age: 25,
-    contacts: {}
+	name: 'Alex',
+	age: 25,
+	contacts: {}
 }
 
 function readMobile (user) {
-    (user.contacts.telephone.mobile)
-    ? console.log('mobile exists')
-    : console.log('no mobile')
+	(user.contacts.telephone.mobile)
+	? console.log('mobile exists')
+	: console.log('no mobile')
 }
 readMobile(user)
 //Выдаст ошибку, так как user.contacts.telephone не существует
 
 function readMobile (user) {
-    (user.contacts?.telephone?.mobile)
-    ? console.log('mobile exists')
-    : console.log('no mobile')
+	(user.contacts?.telephone?.mobile)
+	? console.log('mobile exists')
+	: console.log('no mobile')
 }
 readMobile(user)
 //Выдаст undefined, который сконвертируется в false, сработает второе условие 'no mobile'.
@@ -245,9 +246,9 @@ let {title, params: {height} } = { title: "Menu", params: {height: 200} }
 
 //===================Применение в функции:====================
 let obj = {
-    name: 'Uriy',
-    surname: 'Korotovskikh',
-    someOtherProp: 'anyValue'
+	name: 'Uriy',
+	surname: 'Korotovskikh',
+	someOtherProp: 'anyValue'
 }
 
 //Нужно передать объект в функцию и использовать там только два его свойства.
@@ -256,7 +257,7 @@ let obj = {
 //Можно совершить любые операции со свойствами - дефолтное значение, новое название 
 //переменной и так далее.
 function getFullName ({name:firstName = 'noName', surname:secondName = 'noSurname'}) {
-    console.log(`Full name is ${firstName}, ${secondName}`)
+	console.log(`Full name is ${firstName}, ${secondName}`)
 }
 
 getFullName(obj) //просто передаем объект в функцию.
@@ -309,9 +310,9 @@ let str = 'Hello'
 let iterator = str[Symbol.iterator]()
 
 while (true) {
-    let result = iterator.next()
-    if (result.done) break
-    console.log(result.value)
+	let result = iterator.next()
+	if (result.done) break
+	console.log(result.value)
 }
 
 //======================================================
@@ -323,8 +324,8 @@ for (key in object)
 быть преобразована в число.*/
 
 for (let key in obj) { 
-    console.log(key) //показать ключ
-    console.log(obj[key]) //показать значение
+	console.log(key) //показать ключ
+	console.log(obj[key]) //показать значение
 }
 
 //======================================================
@@ -347,24 +348,24 @@ switch () {case ...}
 let a = 2
 let b = 2
 switch (a * b) {
-    case 1: 
-        console.log(1)
-        break
+	case 1: 
+		console.log(1)
+		break
 
-    case 2: //допустимо группировать условия
-    case 3:
-        console.log(23)
-        break
+	case 2: //допустимо группировать условия
+	case 3:
+		console.log(23)
+		break
 
-    case '4': //не выполнится, так как не совпадает тип данных
-        console.log('Number 4')
-        break
+	case '4': //не выполнится, так как не совпадает тип данных
+		console.log('Number 4')
+		break
 
-    case 4: //выполнится
-        console.log(4)
-        break 
+	case 4: //выполнится
+		console.log(4)
+		break 
 
-    default: console.log('Nothing done.') //если не сработает ни одно условие
+	default: console.log('Nothing done.') //если не сработает ни одно условие
 }
 
 >=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>
@@ -442,7 +443,7 @@ let person = JSON.parse(raw)
 События localStorage
 
 window.addEventListener('storage', event => {
-    console.log(event)
+	console.log(event)
 })
 //или
 window.onstorage = (event) => console.log(event)
@@ -486,12 +487,15 @@ console.timeEnd(timerName) //останавливает таймер с указ
 
 //Одновременное объявление переменных
 let x, y, z
+let x, y, z = 0 //undefined, undefined, 0
 
 //Множественное объявление переменных
 let [x, y, z] = [1, 2, 3]
 
 //Тернарник
 Condition ? case1 : case2
+//Также применим для определения переменной в зависимости от условия:
+let variable = (20 > x) ? 'base value' : 'alternative value'
 
 //Значение по умолчанию (фолбэк)
 let imagePath = getImagePath() || 'default.jpg'
@@ -748,6 +752,31 @@ length - то, какой длины должна быть новая строк
 
 Метод padEnd() работает аналогично, но добавляет символы в конец строки.*/
 
+----------------
+
+String.replace(regexp|substring, newSubstr|function)
+/*Возвращает новую строку с замененной частью.
+regexp - регулярное выражение для поиска в строке заменяемых фрагментов.
+substring - фрагмент строки, который нужно заменить (заменяется лишь первое вхождение).
+newSubstr - заменяющая строка.
+function - функция для создания новой подстроки.
+
+Интересный момент - в newSubstr можно передавать специальные параметры замены:
+$1 - первая из совпавших строк, $2 - вторая из них, $n - n-нная из них.
+Таким образом легко переставить символы или субстроки местами.
+
+Старая строка не изменяется.*/
+
+----------------
+
+String.match(regexp)
+/*Возвращает массив с результатами сопоставления, то есть теми занчениями, которые удовлетворяют
+регулярному выражению. Если их нет, то вернет null.
+В параметр можно передавать лишь регулярные выражения.
+
+Старая строка не изменяется.
+*/
+
 >=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>
 
 RegExp Регулярные выражения
@@ -786,6 +815,7 @@ n$ конец строки, без символа n просто выбирае�
 \W все кроме цифробуквенных символов
 \b граница слова
 \B не граница
+() группировка, например, (\s|-) - пробел или дефис
 
 //Квантификация
 n{4} искать количество символов n подряд 4 раза
@@ -877,8 +907,8 @@ evt и preventDefault()
 //например preventDefault() - отменяет стандартное действие события. К примеру:
 
 form.onsubmit = function(evt) {
-    evt.preventDefault();
-    console.log('Форма не отправлена!');
+	evt.preventDefault();
+	console.log('Форма не отправлена!');
 
 //Выведет строку в консоль вместо действия отправки данных формы.
 
@@ -898,7 +928,7 @@ event.target - элемент, на который кликнули (в проц
 
 <form onclick="alert('form')">
   <div onclick="alert('div')">
-    <p onclick="alert('p')">P</p> //элемент с самой большой вложенностью.
+	<p onclick="alert('p')">P</p> //элемент с самой большой вложенностью.
   </div>
 </form>*/
 
@@ -926,10 +956,10 @@ class CustomElem extends HTMLElement{
 connectedCallback() //срабатывет тогда, когда компонент добавляется в документ.
 //в этой функции мы можем работать с элементом через this.
 connectedCallback() {
-    this.innerHTML = `<h1>Hello World...</h1>`
-    this.style.color = "red"
+	this.innerHTML = `<h1>Hello World...</h1>`
+	this.style.color = "red"
 
-    //именно в этом методе рекомендуется проводить рендеринг нашего элемента.
+	//именно в этом методе рекомендуется проводить рендеринг нашего элемента.
 }
 
 disconnectedCallback() //вызывается, когда элемент удаляется из документа.
@@ -960,7 +990,7 @@ rest наоборот, создает массив из набора значе�
 Пример:*/
 funcTest(1, 2, ...someArray) //spread
 function funcTest (a, b, ...args) { //rest
-    return a + b + args.reduce((a, i) => a + i)
+	return a + b + args.reduce((a, i) => a + i)
 }
 
 
@@ -999,15 +1029,15 @@ Rest
 
 //Применяется, когда в параметры функции может передаваться неограниченное число значений.
 function testSpread (...args) {
-    //Здесь rest, так что в функцию попадет массив, можно пройтись по нему.
-    for (let arg of args) {
-        console.log(arg)
-    }
+	//Здесь rest, так что в функцию попадет массив, можно пройтись по нему.
+	for (let arg of args) {
+		console.log(arg)
+	}
 }
 
 //Либо когда часть параметров принимет функция, а остальные необходимо положить в массив.
-function personInfo (name, age, ...rest) {
-    console.log(`${name} ${age} is ${rest[0]}`)
+function personInfo (name, surname, ...rest) {
+	console.log(`${name} ${surname} is ${rest[0]}`)
 }
 personInfo('July', 'Caesar', 'Imperor')
 
@@ -1037,9 +1067,9 @@ personInfo('July', 'Caesar', 'Imperor')
 То есть с ней нужно работать так:*/
 
 function* generator () => { //объявление функции
-    yield 1;
-    yield 2;
-    return 3;
+	yield 1;
+	yield 2;
+	return 3;
 }
 let generate = generator(); //возвращаем генератор и присваиваем его в переменную
 
@@ -1059,7 +1089,7 @@ function* generateSequence() {
 let generator = generateSequence();
 
 for(let value of generator) {
-    alert(value); }
+	alert(value); }
 // 1, затем 2, а 3 не выведется, так как циклы не работают с return(done: true), 
 //вместо этого для корректного отображения нужно указать три поля yield.
 
@@ -1070,14 +1100,14 @@ for(let value of generator) {
 //генератора будут выполняться все действия внутреннего.
 ;
 function* generateSecuence (start, end) { //генератор для вставки внутрь
-    for (let i = start; i <= end; i++) {
-        yield i;
-    }
+	for (let i = start; i <= end; i++) {
+		yield i;
+	}
 }
 
 function* generateSomeNums () { //Внешний генератор
-    yield* generateSecuence(1, 5)
-    yield* generateSecuence(7, 10)
+	yield* generateSecuence(1, 5)
+	yield* generateSecuence(7, 10)
 }
 
 //Если пробежаться по внешнему генератору циклом и составить из результатов строку,
@@ -1086,7 +1116,7 @@ function* generateSomeNums () { //Внешний генератор
 let str = ''
 let generator = generateSomeNums()
 for (let value of generator) {
-    str += value
+	str += value
 }
 //str = '1234578910'
 
@@ -1097,10 +1127,10 @@ for (let value of generator) {
 передаем результат обартно в генератор и продолжаем его выполнение.*/
 
 function *gena () {
-    let surname = 'Smith'
-    let name = yield "name" //Нам нужно значение name 
-    let fullname = name + surname
-    alert (fullname)
+	let surname = 'Smith'
+	let name = yield "name" //Нам нужно значение name 
+	let fullname = name + surname
+	alert (fullname)
 }
 
 let generator = gena()
@@ -1119,18 +1149,18 @@ generator.next('John') //передаем в генератор значение
 /*Можно создать собственный аналог генератора при помощи обычной функции-метода в объекте.
 iteretor - object*/
 const iteretor = {
-    gen (n = 0) { // [Symbol.iterator] чтобы можно было пробежаться for of
-        let i = 0
-        //возвращаем next, чтобы было удобнее работать
-        return {
-            next() {
-                if (i < n) {
-                    return {value: ++i; done: false}
-                }
-                return {value: undefined; done: true}
-            }
-        }
-    }
+	gen (n = 0) { // [Symbol.iterator] чтобы можно было пробежаться for of
+		let i = 0
+		//возвращаем next, чтобы было удобнее работать
+		return {
+			next() {
+				if (i < n) {
+					return {value: ++i; done: false}
+				}
+				return {value: undefined; done: true}
+			}
+		}
+	}
 }
 //Поместим в переменную метод объекта
 const itr = iterator.gen()
@@ -1289,16 +1319,16 @@ console.log('Are you ready?') //выполнится первым, так как
 //В асинхронных функциях обязательно нужно отлавливать ошибки.
 //Для этого оборачиваем их в блок try/catch
 async function fetchUrl () {
-    console.log('Fetch started')
-    try {
-        const response = await fetch(url)
-        const data = await response.json()
-        console.log('Data: ', data)
-    } catch (e) {
-        console.error(e)
-    } finally {
-        console.log('Program ends')
-    }
+	console.log('Fetch started')
+	try {
+		const response = await fetch(url)
+		const data = await response.json()
+		console.log('Data: ', data)
+	} catch (e) {
+		console.error(e)
+	} finally {
+		console.log('Program ends')
+	}
 }
 
 >=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>
@@ -1315,35 +1345,35 @@ async function fetchUrl () {
 
 console.log('Requesting data...')
 const p = new Promise((resolve, reject) => {
-    setTimeout(() => {    //происходит асинхронная операция внутри промиса
-        console.log('Preparing data...')
-        const backendData = {
-            server: 'aws',
-            status: 'working'
-        }
-        resolve(backendData) //выполняет промис и передает дальше данные
-    }, 2000)
+	setTimeout(() => {    //происходит асинхронная операция внутри промиса
+		console.log('Preparing data...')
+		const backendData = {
+			server: 'aws',
+			status: 'working'
+		}
+		resolve(backendData) //выполняет промис и передает дальше данные
+	}, 2000)
 })
 
 p.then((data) => { //then запускает коллбэк после выполнения промиса с переданными данными
-    return new Promise((resolve, reject) => { //возвращает новый промис из метода then
-        console.log('Modifying data...')
-        setTimeout(() => {    //происходит асинхронная операция внутри промиса
-            data.modified = true;
-            resolve(data) //передает изменные даные
-        }, 2000)
-    })
+	return new Promise((resolve, reject) => { //возвращает новый промис из метода then
+		console.log('Modifying data...')
+		setTimeout(() => {    //происходит асинхронная операция внутри промиса
+			data.modified = true;
+			resolve(data) //передает изменные даные
+		}, 2000)
+	})
 
 })  
-    .then((modifiedData) => { //этот then уже от вложенного промиса
-        console.log('Data received...', modifiedData)
-    })
-    .catch((err) => {
-        console.error('Error: ', err) //в случает reject у прошлого промиса выведет ошибку
-    })
-    .finally(() => {
-        console.log('Finish!') //выполнится в любом случае
-    })
+	.then((modifiedData) => { //этот then уже от вложенного промиса
+		console.log('Data received...', modifiedData)
+	})
+	.catch((err) => {
+		console.error('Error: ', err) //в случает reject у прошлого промиса выведет ошибку
+	})
+	.finally(() => {
+		console.log('Finish!') //выполнится в любом случае
+	})
 
 
 /*Использование промисов в функциях. Они запускаются одновременно, но заканчивают действие 
@@ -1351,16 +1381,16 @@ p.then((data) => { //then запускает коллбэк после выпо�
 С этими функциями можно работать методами промисов, так как они возвращают промис.*/
 
 const sleep = (ms) => { //функция возвращает промис
-    return new Promise (resolve => {
-        setTimeout(() => {
-            resolve();
-        }, ms) //таймер сработает через ms секунд
-    })
+	return new Promise (resolve => {
+		setTimeout(() => {
+			resolve();
+		}, ms) //таймер сработает через ms секунд
+	})
 }
 
 //теперь можно вызывать эти функции и они будут выполняться асинхронно.
 sleep(2000).then(() => {
-    console.log('after 2 seconds') //работаем методами промиса
+	console.log('after 2 seconds') //работаем методами промиса
 })
 
 
@@ -1368,7 +1398,7 @@ sleep(2000).then(() => {
 /*К ним относятся уже перечисленные выше .then, .catch, .finally
 Еще два важных метода промисов это .all и .race. Например:*/
 Promise.all([Promise1, Promise2]).then(() => {
-    console.log('Это сработает лишь тогда, когда выполнятся и Promise1 и Promise2');
+	console.log('Это сработает лишь тогда, когда выполнятся и Promise1 и Promise2');
 })
 
 /*Они работают с массивами промисов и выполняются либо когда все промисы 
@@ -1398,7 +1428,7 @@ for await (let num of asyncronius)
 //Но стоит помнить, что await работает лишь в асинхронных функциях.
 //Верная запись:
 async function func() {
-    for await (let num of asyncronius)
+	for await (let num of asyncronius)
 }
 func()
 
@@ -1423,23 +1453,23 @@ typeof Class = 'function'
 Конструктор может быть вызван только при использовании ключевого слова new.*/
 
 class Animal {
-    hasTail = true //базовое свойство, которое просто скопируется в объект.
-    static type = 'Animal' //статическая переменная, доступна только в классе, в объектах - нет
+	hasTail = true //базовое свойство, которое просто скопируется в объект.
+	static type = 'Animal' //статическая переменная, доступна только в классе, в объектах - нет
 
-    constructor(options) { //здесь задаем параметры, которые нужно будет указать при создании.
-        this.name = options.name
-        this.age = options.age
-    }
+	constructor(options) { //здесь задаем параметры, которые нужно будет указать при создании.
+		this.name = options.name
+		this.age = options.age
+	}
 
-    voice(){ //задаем методы, которые будет наследовать объект
-        console.log('I am animal!')
-    }
+	voice(){ //задаем методы, которые будет наследовать объект
+		console.log('I am animal!')
+	}
 }
 
 //Создадим объект на основе класса
 const animal = new Animal ({
-    name: 'animal',
-    age: 5
+	name: 'animal',
+	age: 5
 })
 
 //Классы могут обеспечить полноценное наследование. Мы можем
@@ -1453,65 +1483,65 @@ class Cat extends Animal {} //родитель и потомок идентич�
 //Без этого только лишь с новым свойством будет ошибка.
 
 class Cat extends Animal {
-    static type ='CAT'
+	static type ='CAT'
 
-    constructor (options) {
-        super(options) //реализует свойства, указанные в родителе
-        this.color = options.color //добавляем новое свойство
-    }
+	constructor (options) {
+		super(options) //реализует свойства, указанные в родителе
+		this.color = options.color //добавляем новое свойство
+	}
 
-    //добавляем новые методы в дочерний класс
-    get ageInfo () {
-        return this.age * 7
-    }
+	//добавляем новые методы в дочерний класс
+	get ageInfo () {
+		return this.age * 7
+	}
 }
 
 //Practice. Практическое применение классов в работе с сайтом.
 //class Component (и его дочерние классы) будет любому элементу присваивать методы,
 //позволяющие скрывать и показывать их.
 class Component {
-    constructor (selector) {
-        this.$el = document.querySelector(selector) //присваиваем элемент из DOM
-    }
+	constructor (selector) {
+		this.$el = document.querySelector(selector) //присваиваем элемент из DOM
+	}
 
-    hide() {
-        this.$el.style.display = 'none'
-    }
+	hide() {
+		this.$el.style.display = 'none'
+	}
 
-    show() {
-       this.$el.style.display = 'block' 
-    }
+	show() {
+	   this.$el.style.display = 'block' 
+	}
 }
 
 class Box extends Component { //создает квадрат на основе класса Component.
-    constructor (options) {
-        super(options.selector)
-        this.$el.style.width = options.size + 'px'
-        this.$el.style.height = options.size + 'px'
-        this.$el.style.background = options.background
-    }
+	constructor (options) {
+		super(options.selector)
+		this.$el.style.width = options.size + 'px'
+		this.$el.style.height = options.size + 'px'
+		this.$el.style.background = options.background
+	}
 }
 
 const box = new Box ({ //создаем объект на основе класса Box
-    selector: '#box',
-    size: 100,
-    background: 'red'
+	selector: '#box',
+	size: 100,
+	background: 'red'
 })
 //Далее на основе этого кода мы даем любому элементу айдишник #box и он
 //будет принимать форму, котору юмы задаем, создавая Box.
 
 class Circle extends Box {
-    constructor (options) {
-        super(options)
-        this.$el.style.borderRadius = '50%'
-    }
+	constructor (options) {
+		super(options)
+		this.$el.style.borderRadius = '50%'
+	}
 }
 
 //Как и у функций, у классов есть class declaration(стандартная запись)
 //и class expression:
 let MyClass = class {
-    //constructor
-    //methods
+	//constructor
+	//methods
 }
 
 
@@ -1581,8 +1611,8 @@ Array.sort([compareFunction])
 
 compareFunction действует следующим образом:*/
 function(a, b) {
-    if //условие, которое нужно нам
-    return
+	if //условие, которое нужно нам
+	return
 }
 /*Если функция возвращает отрицательное число(обычно юзают -1), то
 это говорит методу, что a меньше b. Метод поставит a впереди b.
@@ -1761,15 +1791,15 @@ Array.fill(value, [start], [end])
 c: 'Hello!' //неперечислимое
 
 c: {
-    value: 'Hello!', //перечислимое
-    enumerable: true
+	value: 'Hello!', //перечислимое
+	enumerable: true
 }
 
 
 /*Чтобы прототип не потерялся, нельзя задавать его целиком, необходимо лишь вписывать в 
 него определенное свойство.*/
 Object.prototype = {
-    someFunc: function()
+	someFunc: function()
 }
 //Нужно писать так:
 Object.prototype.someFunc: function()
@@ -1782,9 +1812,9 @@ Object.prototype.someFunc: function()
 object.hasOwnProperty('property')
 
 for (let value in obj) {
-    if (obj.hasOwnProperty('property')) {
-        //some code
-    }
+	if (obj.hasOwnProperty('property')) {
+		//some code
+	}
 }
 
 >=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>
@@ -1796,16 +1826,16 @@ Object.create()
 Прототипом в этом случае выступает пустой объект.*/
 
 Object.create({}, {
-    name: {
-        value: 'Yury',
-        enumerable: true, //определяет можно ли пробегать по нему циклу
-        writable: true, //определяет можно ли изменять свойство
-        configurable: true //определяет, можно ли удалять свойство
-    },
+	name: {
+		value: 'Yury',
+		enumerable: true, //определяет можно ли пробегать по нему циклу
+		writable: true, //определяет можно ли изменять свойство
+		configurable: true //определяет, можно ли удалять свойство
+	},
 
-    age: {
-        ...
-    }
+	age: {
+		...
+	}
 })
 
 
@@ -1820,12 +1850,12 @@ Object.getOwnPropertyDescriptor(object, propertyName)
 Object.getOwnPropertyDescriptors(object)
 
 Object.defineProperty(object, 'propertyName', {
-    writable: false
+	writable: false
 })
 //Определить сразу несколько свойств
 Object.defineProperties(obj, { //obj - новый или старый объект, которому определяют свойства.
-    propX: {value: 'x', writable: true},
-    ...
+	propX: {value: 'x', writable: true},
+	...
 })
 
 //Также все это можно настраивать глобально для всех свойств объекта.
@@ -1850,31 +1880,31 @@ Object.fromEntries() //Преобразовать массив пар в объ�
 Пример:*/
 
 let user = {
-    name: 'Yury',
-    surname: 'Korotovskikh',
-    get fullName () {
-        return `Full name is ${this.name}, ${this.surname}` //Возвращает что-либо
-    },
-    set fullName (value) {
-        document.body.style.background = 'red' //Можно творить любую дичь
-        [this.name, this.surname] = value.split(' ')//Изменять свойства объекта через this
-    }
+	name: 'Yury',
+	surname: 'Korotovskikh',
+	get fullName () {
+		return `Full name is ${this.name}, ${this.surname}` //Возвращает что-либо
+	},
+	set fullName (value) {
+		document.body.style.background = 'red' //Можно творить любую дичь
+		[this.name, this.surname] = value.split(' ')//Изменять свойства объекта через this
+	}
 }
 
 //Другой вариант записи геттера/сеттера, в этом случае вызывается по-другому.
 
 let user = {
-    name: 'Yury',
-    surname: 'Korotovskikh',
-    fullName: {
-        get () {
-            return `Full name is ${this.name}, ${this.surname}`
-        },
-        set (value) {
-            document.body.style.background = 'red'
-            [this.name, this.surname] = value.split(' ')
-        }
-    }
+	name: 'Yury',
+	surname: 'Korotovskikh',
+	fullName: {
+		get () {
+			return `Full name is ${this.name}, ${this.surname}`
+		},
+		set (value) {
+			document.body.style.background = 'red'
+			[this.name, this.surname] = value.split(' ')
+		}
+	}
 }
 
 //Свойство объекта может быть либо аксессором, либо свойством с данными. 
@@ -1887,18 +1917,18 @@ Object._var = ...
 //через сеттер, в который выставляется условие:
 
 let user = {
-    get name () {
-        return this._name
-    },
-    surname: 'Korotovskikh',
-    set name (value) {
-        if (typeof value != 'string') {
-            console.log('Type a string.')
-            return
-        } else {
-            this._name = value
-        }
-    }
+	get name () {
+		return this._name
+	},
+	surname: 'Korotovskikh',
+	set name (value) {
+		if (typeof value != 'string') {
+			console.log('Type a string.')
+			return
+		} else {
+			this._name = value
+		}
+	}
 }
 
 >=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>
@@ -1924,6 +1954,14 @@ Object.keys(obj)
 свойства из цепочки прототипов, а метод нет.
 
 Не изменяет объект. Возвращает новый массив.*/
+
+---------------
+
+Object.values(obj)
+/*Возвращает массив из свойств объекта. Работает как цикл for in, но опять же метод выдает
+только собственные перечисляемые свойства объекта, а цепочку прототипов игнорирует.
+
+Не меняет сам объект.*/
 
 ---------------
 
@@ -1998,19 +2036,19 @@ let obj = {x: 20, y: {z: 30}};
 
 const makeDeepClone = (obj) => {
 
-    let newObj = {}
+	let newObj = {}
 
-    Object.keys(obj).map(key => {
+	Object.keys(obj).map(key => {
 
-        if (typeof obj[key] === 'object') {
-            newObj[key] = makeDeepClone(obj[key])
-        } else {
-            newObj[key] = obj[key]
-        }
+		if (typeof obj[key] === 'object') {
+			newObj[key] = makeDeepClone(obj[key])
+		} else {
+			newObj[key] = obj[key]
+		}
 
-    })
+	})
 
-    return newObj
+	return newObj
 }
 
 const cloneObj = makeDeepClone(obj)
@@ -2152,11 +2190,11 @@ xhr.onerror = function() { //если вообще не получилось о�
 }
 
 xhr.onprogress = function(event) { //работает при загрузке ответа с сервера
-    alert(`Получено ${event.loaded} байт`)
-    //здесь доступна работа с автоматически генерируемым event:
-    // event.loaded - количество загруженных байт
-    // event.lengthComputable = равно true, если сервер присылает заголовок Content-Length
-    // event.total - количество байт всего (только если lengthComputable равно true)
+	alert(`Получено ${event.loaded} байт`)
+	//здесь доступна работа с автоматически генерируемым event:
+	// event.loaded - количество загруженных байт
+	// event.lengthComputable = равно true, если сервер присылает заголовок Content-Length
+	// event.total - количество байт всего (только если lengthComputable равно true)
 }
 
 //После получения ответа с сервера мы можем обратиться к нему через свойства:
@@ -2205,48 +2243,48 @@ XMLHttpRequest не разрешено изменять их ради безоп
 const requestURL = 'https://jsonplaceholder.typicode.com/users/'
 
 function sendRequest (method, url, body = null) {
-    return new Promise ((resolve, reject) => {
-        let xhr = new XMLHttpRequest()
+	return new Promise ((resolve, reject) => {
+		let xhr = new XMLHttpRequest()
 
-        xhr.open(method, url)
+		xhr.open(method, url)
 
-        xhr.responseType = 'json'
-        xhr.setRequestHeader('Content-Type', 'application/json')
-        //определяем тип передаваемых данных при методе POST
+		xhr.responseType = 'json'
+		xhr.setRequestHeader('Content-Type', 'application/json')
+		//определяем тип передаваемых данных при методе POST
 
-        xhr.onload = () => {
-            if (xhr.status >= 400) {
-                reject(xhr.response)
-            } else {
-                resolve(xhr.response)
-            }
-        }
+		xhr.onload = () => {
+			if (xhr.status >= 400) {
+				reject(xhr.response)
+			} else {
+				resolve(xhr.response)
+			}
+		}
 
-        xhr.onerror = () => {
-            reject(xhr.response)
-        }
+		xhr.onerror = () => {
+			reject(xhr.response)
+		}
 
-        xhr.send(JSON.stringify(body))
-        //преобразуем наш объект в строку JSON при методе POST
-    })
+		xhr.send(JSON.stringify(body))
+		//преобразуем наш объект в строку JSON при методе POST
+	})
 }
 
 //Теперь отправим запрос GET
 sendRequest('GET', requestURL)
-    .then(data => console.log(data))
-    .catch(err => console.error(err))
+	.then(data => console.log(data))
+	.catch(err => console.error(err))
 
 
 //И запрос POST
 var user = {
-    name: 'Uriy',
-    surname: 'Korotovskikh',
-    age: 24
+	name: 'Uriy',
+	surname: 'Korotovskikh',
+	age: 24
 }
 
 sendRequest('POST', requestURL, user)
-    .then(data => console.log(data))
-    .catch(err => console.error(err))
+	.then(data => console.log(data))
+	.catch(err => console.error(err))
 
 >=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>
 
@@ -2284,8 +2322,8 @@ let result = await response.json(); // читать тело ответа в ф�
 //Для базового запроса этого достаточно.
 //Также можно переписать данную запись через методы промисов:
 fetch(url, options)
-    .then(response => response.json())
-    .then(result => ...)
+	.then(response => response.json())
+	.then(result => ...)
 
 
 response.headers (заголовки ответа)
@@ -2293,15 +2331,15 @@ response.headers (заголовки ответа)
 //С ним можно взаимодействовать при помощи методов карты.
 response.headers.get('Content-Type')
 for (let [key, value] of response.headers) {
-    console.log(`${key} = ${value}`);
+	console.log(`${key} = ${value}`);
 }
 
 headers (заголовки запроса)
 //Заголовки запроса задаются в options при вызове fetch.
 let response = fetch(url, {
-    headers: {
-        Authentication: 'secret'
-    }
+	headers: {
+		Authentication: 'secret'
+	}
 })
 //Есть список запрещенных заголовков, которые мы не можем устанавливать,
 //Это делает исключительно браузер.
@@ -2310,11 +2348,11 @@ let response = fetch(url, {
 POST-запросы с fetch()
 //Для формирования такого запроса также используем options.
 fetch (url, {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-    },
-    body: JSON.stringify(obj)
+	method: 'POST',
+	headers: {
+		'Content-Type': 'application/json;charset=utf-8'
+	},
+	body: JSON.stringify(obj)
 });
 //Данные можно отправлять в следующих форматах:
 //Строка (в т.ч. JSON), FormData, бинарные данные (Blob/BufferSource).
@@ -2327,73 +2365,60 @@ AbortController()
 //Полный пример fetch() GET
 function sendRequest(method, url, body = null) {
 
-    return fetch(url)
-    .then(response => {
-        if (response.ok) {
-            return response.json()
-        }
-        return response.json().then(error => {
-            const e = new Error(`Something goes wrong!`)
-            e.data = error
-            throw e
-        })
-    })
+	return fetch(url)
+	.then(response => {
+		if (response.ok) {
+			return response.json()
+		}
+		return response.json().then(error => {
+			const e = new Error(`Something goes wrong!`)
+			e.data = error
+			throw e
+		})
+	})
 }
 
 let url = 'https://jsonplaceholder.typicode.com/users/'
 
 sendRequest('GET', url)
-    .then(data => console.log(data))
-    .catch(err => console.error(err))
+	.then(data => console.log(data))
+	.catch(err => console.error(err))
 
 
 
 //Полный пример fetch() POST
 function sendRequest(method, url, body = null) {
-    const headers = {
-        'Content-Type': 'application/json'
-    }
+	const headers = {
+		'Content-Type': 'application/json'
+	}
 
-    return fetch(url, {
-        method: method,
-        body: JSON.stringify(body),
-        headers: headers
-    })
-    .then(response => {
-        if (response.ok) {
-            return response.json()
-        }
-        return response.json().then(error => {
-            const e = new Error(`Something goes wrong!`)
-            e.data = error
-            throw e
-        })
-    })
+	return fetch(url, {
+		method: method,
+		body: JSON.stringify(body),
+		headers: headers
+	})
+	.then(response => {
+		if (response.ok) {
+			return response.json()
+		}
+		return response.json().then(error => {
+			const e = new Error(`Something goes wrong!`)
+			e.data = error
+			throw e
+		})
+	})
 }
 
 let url = 'https://jsonplaceholder.typicode.com/users/'
 
 const body = {
-    name: 'Uriy',
-    age: 24
+	name: 'Uriy',
+	age: 24
 }
 
 sendRequest('POST', url, body)
-    .then(data => console.log(data))
-    .catch(err => console.error(err))
-
->=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>
-
-CORS - cross origin resourse sharing (кроссдоменные запросы)
-
-/*В интернете для безопасности (чтобы нельзя было делать запросы с одного сайта
-на сервера других сайтов, которые к нему не имеют отношения) существует такая концепция, как
-same-origin-policy. Она подразумевает, что сетевые запросы можно делать лишь на тот сайт,
-который имеет тот же домен, порт и протокол.
-
-CORS - это спецификация, позволяющая делать кроссдоменные запросы. 
-Это набор заголовков, которые пользволяют с помощью fetch и XMLHttpRequest делать
-запросы на сайты (фактически на сервера сайтов) с другим доменом.*/
+	.then(data => console.log(data))
+	.catch(err => console.error(err))
 
 >=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>
 
@@ -2443,10 +2468,10 @@ JSON.parse(str, [reviver]) //преобразует строку в формат
 //он не будет создан как объект, а записан как обычная строка.
 let str = '{"title":"Conference","date":"2017-11-30T12:00:00.000Z"}'
 let meetup = JSON.parse(str, (key, value) => {
-    if (key === 'date') {
-        return new Date(value)
-    }
-    return value
+	if (key === 'date') {
+		return new Date(value)
+	}
+	return value
 })
 //Теперь будет записан объект дата, а не обычная строка.
 
@@ -2466,14 +2491,14 @@ let formData = new FormData([form])
 </form>
 */
 formElem.onsubmit = async (e) => {
-    e.preventDefault();
+	e.preventDefault();
 
-    let response = await fetch('/article/formdata/post/user', {
-      method: 'POST',
-      body: new FormData(formElem)
-    })
+	let response = await fetch('/article/formdata/post/user', {
+	  method: 'POST',
+	  body: new FormData(formElem)
+	})
 
-    let result = await response.json()
+	let result = await response.json()
 }
 
 
@@ -2520,34 +2545,34 @@ obj = {a: 1, b: 2}
 
 //Например, можно реализовать функцию гет, которая будет работать при вызове свойства объекта
 const objProxy = new Proxy (obj, {
-    get (target, prop) {
-        console.log(`Getting ${prop}`)
-        return target[prop]
-    },
+	get (target, prop) {
+		console.log(`Getting ${prop}`)
+		return target[prop]
+	},
 
 
-    //Далее установим ловушку на присвоение значения свойству.
-    //Причем конструкция if, else делает код более безопасным
-    set (target, prop, value) {
-        if (prop in target) {
-            target[prop] = value
-        } else {
-            throw new Error (`No ${prop} field in ${target}`)
-        }
-    },
+	//Далее установим ловушку на присвоение значения свойству.
+	//Причем конструкция if, else делает код более безопасным
+	set (target, prop, value) {
+		if (prop in target) {
+			target[prop] = value
+		} else {
+			throw new Error (`No ${prop} field in ${target}`)
+		}
+	},
 
 
-    //Теперь проверим, есть ли такое поле в объекте
-    has (target, prop) {
-        return ['a', 'b'].includes(prop)
-    }, //вернет true если есть, иначе false
+	//Теперь проверим, есть ли такое поле в объекте
+	has (target, prop) {
+		return ['a', 'b'].includes(prop)
+	}, //вернет true если есть, иначе false
 
 
-    //Удалим свойство
-    deleteProperty (targer, prop) {
-        console.log(`Deleting ${prop}`)
-        delete target[prop]
-    }
+	//Удалим свойство
+	deleteProperty (targer, prop) {
+		console.log(`Deleting ${prop}`)
+		delete target[prop]
+	}
 })
 
 //Всего для объектов существует 13 методов перехвата, основные представлены выше.
@@ -2559,43 +2584,43 @@ const log = (text) => `Log ${text}`
 
 //Создадим прокси
 const fp = new Proxy(log, {
-    apply(target, thisArg, args) {
-        console.log('Calling fn...')
-        //Сейчас мы перехватили вызов функции log, поэтому нужно запустить ее
-        return target.apply(thisArg, args).toUpperCase()
-        //Фишка в том, что здесь можно что угодно делать с возвращаемым значением,
-        //например, перевести все символы в верхний регистр,
-        //даже если это не указано в функции.
-    }
+	apply(target, thisArg, args) {
+		console.log('Calling fn...')
+		//Сейчас мы перехватили вызов функции log, поэтому нужно запустить ее
+		return target.apply(thisArg, args).toUpperCase()
+		//Фишка в том, что здесь можно что угодно делать с возвращаемым значением,
+		//например, перевести все символы в верхний регистр,
+		//даже если это не указано в функции.
+	}
 })
 
 
 proxy для классов
 //У нас есть созданный класс Person
 class Person {
-    constructor (name, age) {
-        this.name = name
-        this.age = age
-    }
+	constructor (name, age) {
+		this.name = name
+		this.age = age
+	}
 }
 
 //Создадим прокси для этого класса, который будет обрабатывать все его вызовы
 //при создании объектов на его основе
 const personProxy = new Proxy(Person, {
-    //Специальный прокси-метод для отлова создания через конструктор
-    construct(target, args) {
-        console.log('Constructing...')
-        //Раз мы отловили создание, его надо реализовать
-        //return new target(...args)
-        //Но мы можем сразу обернуть новый объект в прокси
-        return new Proxy(new target(...args), {
-            //сразу реализуем метод гет в покси на объекте
-            get (targ, prop) {
-                console.log(`Getting ${prop} prop...`)
-                return targ[prop]
-            }
-        })
-    }
+	//Специальный прокси-метод для отлова создания через конструктор
+	construct(target, args) {
+		console.log('Constructing...')
+		//Раз мы отловили создание, его надо реализовать
+		//return new target(...args)
+		//Но мы можем сразу обернуть новый объект в прокси
+		return new Proxy(new target(...args), {
+			//сразу реализуем метод гет в покси на объекте
+			get (targ, prop) {
+				console.log(`Getting ${prop} prop...`)
+				return targ[prop]
+			}
+		})
+	}
 })
 
 const p = new personProxy('Yury', 24) //Создаем объект черерз прокси.
@@ -2610,13 +2635,13 @@ Example 1.
 //Есть объект obj
 const obj = {id: 2, name: 'korotovskikh', surname: 'Yury'}
 const op = new Proxy (obj, {
-    get (target, prop) {
-        //Реализуем любую логику
-        if (!(prop in target)) {
-            return prop.split('_').map((item) => { return target[item]}).join(' ')
-        }
-        return target[prop]
-    }
+	get (target, prop) {
+		//Реализуем любую логику
+		if (!(prop in target)) {
+			return prop.split('_').map((item) => { return target[item]}).join(' ')
+		}
+		return target[prop]
+	}
 })
 //В данном примере мы можем динамически задавать набор значений,
 //которые хотим получить, разделяя их '_'.
@@ -2627,13 +2652,13 @@ Example 2.
 //в оригинальном JS такой возможности нет. Но решаемо через прокси и метод get
 const array = ['a', 'b', 'c']
 const ap = new Proxy (array, {
-    get (target, propKey) {
-        if (Number(propKey) != NaN && Number.isInteger(Number(propKey)) && Number(propKey) < 0) {
-            propKey = String(target.length + Number(propKey))
-            //сделали propKey строкой, так как индекс массива - это не число, а строка.
-        }
-        return target[propKey]
-    }
+	get (target, propKey) {
+		if (Number(propKey) != NaN && Number.isInteger(Number(propKey)) && Number(propKey) < 0) {
+			propKey = String(target.length + Number(propKey))
+			//сделали propKey строкой, так как индекс массива - это не число, а строка.
+		}
+		return target[propKey]
+	}
 })
 
 
@@ -2642,15 +2667,15 @@ Example 3.
 //Например, чтобы в поле age можно было записать только чило от 1 до 150.
 const person = {name: 'Yury', age: 24}
 const personPropValidator = new Proxy(person, {
-    set(target, property, value) {
-        //Проверяем свойство на соответствие условиям
-        if (property === 'age') {
-            if (!Number.isInteger(value) || (value > 150) || (value < 0)) {
-                throw new TypeError ('Please, use the right age.')
-            }
-        }
-        target[property] = value
-    }
+	set(target, property, value) {
+		//Проверяем свойство на соответствие условиям
+		if (property === 'age') {
+			if (!Number.isInteger(value) || (value > 150) || (value < 0)) {
+				throw new TypeError ('Please, use the right age.')
+			}
+		}
+		target[property] = value
+	}
 })
 
 
@@ -2675,13 +2700,13 @@ const postcode2location = {
 //хэндлер:
 let postcodeValidate = {
   set(target, property, value) {
-    if(property = 'location') {
-      target.postcode = location2postcode[value]
-      
-    }
-    if(property = 'postcode'){
-      target.location = postcode2location[value]
-    }
+	if(property = 'location') {
+	  target.postcode = location2postcode[value]
+	  
+	}
+	if(property = 'postcode'){
+	  target.location = postcode2location[value]
+	}
   }
 }
 
@@ -2696,24 +2721,24 @@ Example 5.
 //Нужно сделать так, чтобы извне свойство нельзя было получить.
 //Есть объект, и мы хотим сделать приватным свойство _uid
 const person = {
-    name: 'Yury',
-    age: 24,
-    _uid: '123123'
+	name: 'Yury',
+	age: 24,
+	_uid: '123123'
 }
 
 //Обернем его в прокси
 const op = withHiddenProps(person)
 
 function withHiddenProps (target, prefix = '_') {
-    return new Proxy(target, {
-        has: (obj, prop) => prop in obj && !prop.startsWith(prefix),
-        //теперь реализуем скрытие для вызова ключей объекта
-        ownKeys: obj => Reflect.ownKeys(obj).filter(p => !p.startsWith(prefix)),
-        //теперь нельзя получить
-        get: (obj, prop, receiver) => (prop in receiver ? obj[prop] : void 0)
-        //receiver это сам прокси
-        //prop in receiver взаимодействует с методом ownKeys, убирая свойства с префиксом
-    })
+	return new Proxy(target, {
+		has: (obj, prop) => prop in obj && !prop.startsWith(prefix),
+		//теперь реализуем скрытие для вызова ключей объекта
+		ownKeys: obj => Reflect.ownKeys(obj).filter(p => !p.startsWith(prefix)),
+		//теперь нельзя получить
+		get: (obj, prop, receiver) => (prop in receiver ? obj[prop] : void 0)
+		//receiver это сам прокси
+		//prop in receiver взаимодействует с методом ownKeys, убирая свойства с префиксом
+	})
 }
 //Теперь свойство скрыто для внешнего доступа:
 //data._uid - undefined
@@ -2725,15 +2750,15 @@ Example 6.
 //defaulValue - свойство которое будет выдаваться, если такого нет в объекте.
 //Создадим функцию, которая будет оборачивать объект в прокси.
 const vithDefaulValue = (target, defaulValue = 0) => {
-    return new Proxy (target, {
-        get (target, prop) {
-            if (prop in object) {
-                return object[prop]
-            } else {
-                return defaultValue
-            }
-        }
-    })
+	return new Proxy (target, {
+		get (target, prop) {
+			if (prop in object) {
+				return object[prop]
+			} else {
+				return defaultValue
+			}
+		}
+	})
 }
 
 //И сам объект, а потом применим к нему функцию
@@ -2746,11 +2771,11 @@ Example 7.
 //Имеем массив из объектов.
 const userData = [
 
-    {id: 1, name: 'Alex', job: 'SystemAdmin', age: 24},
-    {id: 2, name: 'Andrey', job: 'Physician', age: 24},
-    {id: 3, name: 'Evgeniy', job: 'Engeneer', age: 24},
-    {id: 4, name: 'Vladimir', job: 'Scientist', age: 24},
-    {id: 5, name: 'AlexP', job: 'DataEngeneer', age: 24}
+	{id: 1, name: 'Alex', job: 'SystemAdmin', age: 24},
+	{id: 2, name: 'Andrey', job: 'Physician', age: 24},
+	{id: 3, name: 'Evgeniy', job: 'Engeneer', age: 24},
+	{id: 4, name: 'Vladimir', job: 'Scientist', age: 24},
+	{id: 5, name: 'AlexP', job: 'DataEngeneer', age: 24}
 
 ]
 
@@ -2768,36 +2793,36 @@ userData.forEach(item => index[item.id] = item)
 
 //Запроксируем класс, в который будет передаваться массив
 const IndexedArray = new Proxy (Array, {
-    construct(target, [args]) {
-        //Создадим в прокси точно такой же index
-        const index = {}
-        args.forEach(item => index[item.id] = item)
+	construct(target, [args]) {
+		//Создадим в прокси точно такой же index
+		const index = {}
+		args.forEach(item => index[item.id] = item)
 
-        return new Proxy(new target(...args), {
-            get: (arr, prop) => {
-                switch (prop) {
-                    case 'push': return item => {
-                        index[item.id] = item
-                        //продублируем функционал
-                        arr[prop].call(arr, item)
-                    }
-                    case 'findById': return id => index[id]
-                    default: return arr[prop]
-                }
+		return new Proxy(new target(...args), {
+			get: (arr, prop) => {
+				switch (prop) {
+					case 'push': return item => {
+						index[item.id] = item
+						//продублируем функционал
+						arr[prop].call(arr, item)
+					}
+					case 'findById': return id => index[id]
+					default: return arr[prop]
+				}
 
-            }
-        })
-    }
+			}
+		})
+	}
 })
 
 //Собственно, создаем массив
 const users = new IndexedArray([
-    {id: 1, name: 'Alex', job: 'SystemAdmin', age: 24},
-    {id: 2, name: 'Andrey', job: 'Physician', age: 24},
-    {id: 3, name: 'Evgeniy', job: 'Engeneer', age: 24},
-    {id: 4, name: 'Vladimir', job: 'Scientist', age: 24},
-    {id: 5, name: 'AlexP', job: 'DataEngeneer', age: 24}
-    ])
+	{id: 1, name: 'Alex', job: 'SystemAdmin', age: 24},
+	{id: 2, name: 'Andrey', job: 'Physician', age: 24},
+	{id: 3, name: 'Evgeniy', job: 'Engeneer', age: 24},
+	{id: 4, name: 'Vladimir', job: 'Scientist', age: 24},
+	{id: 5, name: 'AlexP', job: 'DataEngeneer', age: 24}
+	])
 //И он сразуоборачивается в прокси.
 
 
@@ -2840,8 +2865,8 @@ myMap.set({name: John, age: 22}, 12345)
 
 //Каждый вызов map.set() возвращает map, так что мы можем чейнить эти вызовы.
 myMap.set('1', 'abc')
-    .set(1: 543)
-    .set(true: 'false')
+	.set(1: 543)
+	.set(true: 'false')
 //Такой метод записи называется fluent интерфейс.
 //Если давать точное определение, то fluent интерфейс - это методика организации кода.
 
@@ -2857,20 +2882,20 @@ map.entries() //возвращает итератор по парам [key, valu
 
 //Все этим способы как правило используются с циклом for of.
 for (let key of map.keys()) {
-    console.log(key)
+	console.log(key)
 }
 
 for (let value of map.values()) {
-    console.log(key)
+	console.log(key)
 }
 
 for (let [key, value] of map) { //то же, что и map.entries()
-    console.log(key, value)
+	console.log(key, value)
 }
 
 //Кроме этого, коллекция имеет встроенный метод forEach, похожий на подобный метод массива
 map.forEach((value, key, map) => {
-    console.log(`${key}: ${value}`)
+	console.log(`${key}: ${value}`)
 })
 
 
@@ -2913,9 +2938,9 @@ let cache = new WeakMap();
 // вычисляем и запоминаем результат
 function process(obj) {
   if (!cache.has(obj)) {
-    let result = /*вычисляем результат для объекта*/ obj;
+	let result = /*вычисляем результат для объекта*/ obj;
 
-    cache.set(obj, result);
+	cache.set(obj, result);
   }
 
   return cache.get(obj);
