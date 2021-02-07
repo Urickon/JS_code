@@ -54,24 +54,28 @@ Data <----- ------> UI
 
 --------------------------------------------------------------
 
+DECLARATIVENESS AND IMPERATIVE
 
+/*Imperative method is a strict method of coding. It's when you give to the program a strict command, like:
+const a = 20
+let name = 'Yuriy'
+console.log('a')
+You use declarative method when you give abstract order, that must be done. But you don't control the process
+of the implementation. It is used in HTML. You just say "I want a div here". You don't control the process
+of drawing div-element.
 
+Another example:
+JS (imperative):
+courses.filter(course => course.id > 2)
 
+SQL (declarative):
+SELECT * FROM courses WHERE id > 2
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+VueJS is also declarative. You only say what you want to be on screen.
+That's why Vue is so fast. Because it knows how to do what you want in the best and shortest way.
+So, Vue does a lot of work 'under the hood'. It's your 'elder brother', which makes imperative code
+(which processor needs) from your declarative code. And it does it's work the best way.
+*/
 
 
 
@@ -143,7 +147,20 @@ If no ask second question:
 If yes - use vue-x or global big package (For exapmle GoogleMaps)
 If no or not sure - use pure JS to deal with it. Don't use special librares for it.*/
 
+Are you really good on vue?
+/*One of the best ways to discover how a person knows technology is asking him about disadvantages of this 
+technology. There is no 'SILVER BULLET'. And vue is not an exeption. So, don't start a holy war. If 
+you think that technology is perfect, you just know it bad.
 
+Vue - is an abstraction above HTML and JS. Pareto law works here - we can solve 80% of JS and HTML problems,
+doing only 20% of work with the help of Vue. But we can't easely solve all the problems with vue.
+
+Vue, Angular, React - there are no bad tech. They can be bad in some cases. But good in another. If you want to
+master any of them, you must know when to use it (to use it's advantages) and when not to use it
+(to avoid it's disadvantages).
+
+So, we can call it 'Theory of restrictions'. Any technology has some restrictions.
+Every time think about is vue really needed or not. Vue is not a silver bullet.
 
 
 
