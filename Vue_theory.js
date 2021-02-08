@@ -74,60 +74,29 @@ SELECT * FROM courses WHERE id > 2
 VueJS is also declarative. You only say what you want to be on screen.
 That's why Vue is so fast. Because it knows how to do what you want in the best and shortest way.
 So, Vue does a lot of work 'under the hood'. It's your 'elder brother', which makes imperative code
-(which processor needs) from your declarative code. And it does it's work the best way.
-*/
+(which processor needs) from your declarative code. And it does it's work the best way.*/
 
+--------------------------------------------------------------
 
+BUSINESS LOGIC OR REALISATION?
+/*Business logic is about what you do. Realisation is about how you do it. For ex:
+The task of business logic is to get films list from server. The task of realisation is to
+complete the business logic's task. You can do it with axios, fetch, web socket, or even localStorage.
+Business logic layer does not want to know how you will complete ist's task. It just want list of films.
 
+This is a key point.
 
+One of the main rules is not to mix business logic (how to show) and realisation logic (how to get what to show).
+So, main task of the component is to show data to user. Don't add getting data to component. It is 
+a violation of Single Responsibility principle. 
+There is one another reason not to do it. When smth is changed in backend, you must change requests. And it's
+easy to do when all working with API logic is separated from other components in one or two files. 
+Components just get info from this file using standart methods. You don't need to change all the components in 
+that case.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Little duck method. Just start to talk to little duck. Explane it all you code. And when you say:
+"This component is responsible for smth AND - here you must stop. One component should have only one area
+of responsibility."*/
 
 
 =====================================================================================================
@@ -160,12 +129,12 @@ master any of them, you must know when to use it (to use it's advantages) and wh
 (to avoid it's disadvantages).
 
 So, we can call it 'Theory of restrictions'. Any technology has some restrictions.
-Every time think about is vue really needed or not. Vue is not a silver bullet.
+Every time think about is vue really needed or not. Vue is not a silver bullet.*/
 
 
+=====================================================================================================
 
-
-
+PRACTICE
 
 
 
