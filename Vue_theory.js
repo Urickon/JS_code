@@ -40,7 +40,14 @@ synchronized. When data is changed we must change UI. In pure JavaScript you mus
 bind them to HTML-elements, and then revoke function every time you want to change UI.
 
 Reactivity of Vue is solving this problem automatically. Vue can bind data and UI. We don't care about data.
-When data is changed, UI will react and change automatically.*/
+When data is changed, UI will react and change automatically.
+
+By the way, there are two concepts - Data and State.
+Data is a set of information
+State is more complicated structure, which can be changed during our session.
+You can erquire data from server and get it. When you need to update data you just load new data.
+But when you got data, and a lot of components started work with it, data becomed state.
+Reactivity is about when a lot of components are using the same data. For example, it is vuex.*/
 
 --------------------------------------------------------------
 
@@ -97,6 +104,18 @@ that case.
 Little duck method. Just start to talk to little duck. Explane it all you code. And when you say:
 "This component is responsible for smth AND - here you must stop. One component should have only one area
 of responsibility."*/
+
+--------------------------------------------------------------
+
+HTML-first
+/*There are two ways to show something on the screen. 
+1. With JavaScript (React). We create render function, which makes our page. It's imperative templating.
+It is a set of hard instructions.
+2. With HTML and special markup (Angular and Vue). We called it HTML-first. It is edcalrative templating.
+We only give our intentions.
+<li v-for:"item in items"> - this is just intention. Vue does it by itself.
+
+So, one of main vue concepts is HTML-first.*/
 
 
 =====================================================================================================
