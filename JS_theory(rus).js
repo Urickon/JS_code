@@ -3395,16 +3395,65 @@ MOBILE INTERFACE
 touchstart //момент начала касания
 touchmove //собственно свайп
 touchend //конец касания или если палец выйдет за край экрана
-touchcancel //когда палец вышел за пределы window
+touchcancel //когда палец вышел за пределы window (expiremental)
 
 //Можно использовать как
 element.addEventListener('touchstart', function())
 //Или как:
 element.ontouchstart = function()
+//Если вы используете события касания, вам следует вызывать 
+//preventDefault() для предотвращения отправки событий мыши.
+//Полный пример соыбтия касания для элемента #box:
+let box = document.qurySelector('#box')
+box.addEventListener('touchstart', function (event) {
+	console.log('You touched me!')
+})
+//В данном случае генерируется событие TouchEvent, обладающее набором свойств.
+//Самые важные из них это
+TouchEvent.changedTouches
+TouchEvent.targetTouches
+TouchEvent.touches
+TouchEvent.scale
+
+//changedTouches, targetTouches, touches возвращают массив TouchList со всеми касаниями.
+//Каждое касание представлено объектом Touch, который также имеет полезные свойства.
+//С их помощью можно, напрмиер, отследить координату касания:
+box.addEventListener('touchstart', function (event) {
+	console.log(`${event.changedTouches[0].pageX}, ${event.changedTouches[0].pageY}`)
+})
 
 
-//Как остледить свайп и его длину.
-Доделать:
-События
-Длина свайпа
+//====================================================
+//Как остледить длину и направление свайпа по горизонтали.
+//Здесь поможет комбинация событий. Скажем, у нас есть некий элемент slider, надо отселдить свайп.
+let slider = document.querySelector('#slider')
+let start = null
+let end = null
 
+function sum (start, end) {
+	return Math.abs(start - end)
+}
+
+function compare (start, end) {
+	if (start > end) {
+		return 'Swipe to left'
+	} 
+	if (start < end) {
+		return 'Swipe to right'
+	}
+}
+
+slider.addEventListener('touchstart', function (event) {
+	start = event.changedTouches[0].pageX
+})
+
+slider.addEventListener('touchend', function (event) {
+	end = event.changedTouches[0].pageX
+	if (start !== end) {
+		console.log(compare(start, end))
+		console.log(sum(start, end))
+	} else return
+})
+
+
+=====================================================================================================
