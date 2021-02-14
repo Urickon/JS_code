@@ -61,7 +61,7 @@ Data <----- ------> UI
 
 --------------------------------------------------------------
 
-DECLARATIVENESS AND IMPERATIVE
+DECLARATIVE AND IMPERATIVE
 
 /*Imperative method is a strict method of coding. It's when you give to the program a strict command, like:
 const a = 20
@@ -143,25 +143,54 @@ you think that technology is perfect, you just know it bad.
 Vue - is an abstraction above HTML and JS. Pareto law works here - we can solve 80% of JS and HTML problems,
 doing only 20% of work with the help of Vue. But we can't easely solve all the problems with vue.
 
-Vue, Angular, React - there are no bad tech. They can be bad in some cases. But good in another. If you want to
+Vue, Angular, React - none is bad. They can be bad in some cases. But good in another. If you want to
 master any of them, you must know when to use it (to use it's advantages) and when not to use it
 (to avoid it's disadvantages).
 
 So, we can call it 'Theory of restrictions'. Any technology has some restrictions.
 Every time think about is vue really needed or not. Vue is not a silver bullet.*/
 
+Nuances of learning (with Coursera 'learning to learn')
+/*TTD - test driving development - its an approach to write code, when u first write it badly,
+just showing the idea. And after that u refactor it.
+The idea is that you must know how to write good code and how to write bad code.
+Don't just repeat from videos. Try to write code by yourself. Make mistakes. Fix it.
+
+As Leo Tolstoy said: "All happy families are happy like each other, and all hapless are hapless in
+their own one. There are a few approaches to write good code and a lot of approaches to write bad code.
+
+Refactoring is a very necessary skill, so learn to find mistakes in code too, not only
+to write good and beautiful code."*/
 
 =====================================================================================================
 
 PRACTICE
 
+//Main directives
+v-bind: // :
+v-on: // @
+@click = "method" === @click = "method()"
+@click.stop = "method" //stop propagation
+@submit.prevent = "method" // preventDefaul
 
+v-if
+v-else
+v-for (:key="key")
+v-model
 
+//Everytime you need a helper element, such as wrapper, use
+template
 
+//Place data right in html with the help of
+{{ data }}
 
+//Working with dynamic classes
+:class = " x > y ? 'myClass' : '' "
+:class = " x > y ? 'class1' : 'class2' "
+:class = " {'myClass': x > y, 'anotherClass': x = y, ...} "
 
-
-
+//Dynamic style
+:style=" {height: `${value}`} "
 
 
 
