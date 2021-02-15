@@ -73,10 +73,12 @@ of drawing div-element.
 
 Another example:
 JS (imperative):
-courses.filter(course => course.id > 2)
+for (i=0; i<10; i++)
 
 SQL (declarative):
 SELECT * FROM courses WHERE id > 2
+
+The most imperative is machine language of processor. The most abstract lang is the most declarative.
 
 VueJS is also declarative. You only say what you want to be on screen.
 That's why Vue is so fast. Because it knows how to do what you want in the best and shortest way.
@@ -117,6 +119,25 @@ We only give our intentions.
 
 So, one of main vue concepts is HTML-first.*/
 
+--------------------------------------------------------------
+
+COMPONENTS
+/*Vue component system.
+For what and how it works (main principles)
+The main purpose of the components system is to provide incapsulation (isolation of elements).
+Incapsulation is a hiding of realisation inside the element.
+It does not make the system more simple. It optimizes the system and divides it into incapsulated elements.
+Another important word is Interface. Every component has its own interface. We can imagine it as a
+black box. We don't need to know what is in the box. We just need an interface to interact with it.
+Of course, interfaces must be universal and comparable. Interface binds an element with another elems.
+It is 'props', 'emits' and so on.
+
+So, components are incapsulated parts of our application. Interfaces help them to interact with each other.
+
+Component is HTML+JS+CSS
+
+Components are closed systems, so they don't provide event propagation. We can manually do that,
+but by default 'what happens in component, stays in component.'*/
 
 =====================================================================================================
 
@@ -190,7 +211,7 @@ template
 :class = " {'myClass': x > y, 'anotherClass': x = y, ...} "
 
 //Dynamic style
-:style=" {height: `${value}`} "
+:style=" {height: `${value}`} " 
 
 
 
