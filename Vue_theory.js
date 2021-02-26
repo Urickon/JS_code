@@ -213,6 +213,43 @@ template
 //Dynamic style
 :style=" {height: `${value}`} " 
 
+//Interact between components
+v-bind:param="param" //in parent
+props: { param } //in child
+
+$emit('my-event', parameter) //in child
+v-on:my-event="action" //in parent
+
+//Filters
+{{ data | filterName }}
+
+export default {
+	filters: {
+		filterName () {
+			return this.value.toUppercase()
+		}
+	}
+}
+
+//Computed
+computed: {
+	computedValue (value) {
+		return value.filter(v => v > 2)
+	}
+}
+//It's better then methods, because computed values can be cached. So application does not count them every
+//time when you use it. They are counted (computed) only when the base value is changing.
+
+//Watchers
+
+//Life circle
+beforeCreate
+created
+beforeMount
+mounted
+...
+
+
 
 
 
