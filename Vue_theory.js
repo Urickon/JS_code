@@ -113,7 +113,7 @@ HTML-first
 /*There are two ways to show something on the screen. 
 1. With JavaScript (React). We create render function, which makes our page. It's imperative templating.
 It is a set of hard instructions.
-2. With HTML and special markup (Angular and Vue). We called it HTML-first. It is edcalrative templating.
+2. With HTML and special markup (Angular and Vue). We called it HTML-first. It is decalrative templating.
 We only give our intentions.
 <li v-for:"item in items"> - this is just intention. Vue does it by itself.
 
@@ -172,7 +172,7 @@ So, we can call it 'Theory of restrictions'. Any technology has some restriction
 Every time think about is vue really needed or not. Vue is not a silver bullet.*/
 
 Nuances of learning (with Coursera 'learning to learn')
-/*TTD - test driving development - its an approach to write code, when u first write it badly,
+/*TDD - test driving development - its an approach to write code, when u first write it badly,
 just showing the idea. And after that u refactor it.
 The idea is that you must know how to write good code and how to write bad code.
 Don't just repeat from videos. Try to write code by yourself. Make mistakes. Fix it.
@@ -190,7 +190,7 @@ PRACTICE
 //Main directives
 v-bind: // :
 v-on: // @
-@click = "method" === @click = "method()"
+@click = "method" === @click = "method()" //and many of them (you just dont need to create pure js events)
 @click.stop = "method" //stop propagation
 @submit.prevent = "method" // preventDefaul
 
@@ -198,12 +198,18 @@ v-if
 v-else
 v-for (:key="key")
 v-model
+v-show //works as v-if but it renders all html (so you can work with html even when it is not displayed)
+//v-if renders only when the condition is true.
 
 //Everytime you need a helper element, such as wrapper, use
 template
 
 //Place data right in html with the help of
 {{ data }}
+
+//
+slot
+//If component dont't have v-slot, any content between its tags will be discarded.
 
 //Working with dynamic classes
 :class = " x > y ? 'myClass' : '' "
@@ -212,6 +218,7 @@ template
 
 //Dynamic style
 :style=" {height: `${value}`} " 
+:height="value"
 
 //Interact between components
 v-bind:param="param" //in parent
@@ -219,17 +226,6 @@ props: { param } //in child
 
 $emit('my-event', parameter) //in child
 v-on:my-event="action" //in parent
-
-//Filters
-{{ data | filterName }}
-
-export default {
-	filters: {
-		filterName () {
-			return this.value.toUppercase()
-		}
-	}
-}
 
 //Computed
 computed: {
@@ -247,7 +243,12 @@ beforeCreate
 created
 beforeMount
 mounted
+changed
 ...
+
+//One of the main vue concepts is not to call elements directly. Use v-bind wherever you can. 
+//$refs are emergency method.
+//Another base concept is template. Use template wherever you can. DRY! (don't repeat yourself)
 
 
 
