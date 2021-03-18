@@ -207,9 +207,15 @@ template
 //Place data right in html with the help of
 {{ data }}
 
-//
 slot
+//Slot helps to use templates. Slot will take all data that is between template tags. For ex
+//we have a <popup></popup> components. <popup>{{dataToSlot htmlToSlot}}</popup>
 //If component dont't have v-slot, any content between its tags will be discarded.
+
+/*We can specify slots giving them name attribute and refer to this name in our template
+<slot name="header"></slot>
+...
+<template v-slot="header"></template>*/
 
 //Working with dynamic classes
 :class = " x > y ? 'myClass' : '' "
@@ -249,6 +255,16 @@ changed
 //One of the main vue concepts is not to call elements directly. Use v-bind wherever you can. 
 //$refs are emergency method.
 //Another base concept is template. Use template wherever you can. DRY! (don't repeat yourself)
+//Make all templates reusable. Use props to send info to template wherever you can, not defined values 
+//(to make your template more multipurpose).
+props: {
+	name: {
+		type: String,
+		required: true, //Makes prop mandatory
+        default: 'Tom',
+        validator: function(value) //to check value, throws an error when returns false.
+	}
+}
 
 
 
