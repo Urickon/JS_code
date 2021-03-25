@@ -169,6 +169,11 @@ Type Guards
 typeof(data) //возвращает строку с названием типа данных
 data instanceof(someClass) //првоеряет, принадлежит ли объект определенному классу.
 
+//Корректно проверить, есть ли свойство в объекте
+if ('property' in object) {
+	// ...do something
+}
+
 ------------------------------
 
 Generics (обобщения)
@@ -233,7 +238,8 @@ const response2: ServerResponseType<ServerType> = {
 
 /*Не совсем обычная запись. В аргументах указываем их тип данных.
 При вызове функции в TS в нее нужно передавать столько аргументов, сколько она содержит.
-Чтобы сделать некоторые аргументы необязательными, их помечают знаком ?*/
+Чтобы сделать некоторые аргументы необязательными, их помечают знаком ?
+Необязательный паарметр всегда должен следовать после обязательного.*/
 
 function sayMyName (name?: string): void { //function declaration, name - необязательный аргумент
 	console.log(name)
@@ -268,6 +274,10 @@ function(x: number, y: number): number { return x + y }
 function getName(firstName: string, lastName: string="Иванов") {
     return firstName + " " + lastName;
 }
+//Если первый параметр задан по умолчанию, а второйнеобходимо передать в функцию, то следует при вызове функции указать
+//первый как undefined.
+function getName(fName:string="Will", lName: string)
+getName(undefined, "Smith")
 
 //Неограниченный набор параметров передается в функцию следующим образом:
 function addNumbers(firstNum: number, ...numberArr: number[]): number {
@@ -277,9 +287,14 @@ function addNumbers(firstNum: number, ...numberArr: number[]): number {
 let result = addNumbers(1, 4, 77, 55, 12) //все аргументы после первого попадут в числовой массив
 
 /*Перегрузка функций в TS.
+Отметим, что перегрузка это номинальное название, так как в реальности это не совсем перегрузка.
+
 Так как каждая конкретная функция работает с конкретным типом данных, можно объединять
 их под одинаковым именем. Такая функция sum будет складывать строки и числа
-в зависимости от того, какие данные получит.*/
+в зависимости от того, какие данные получит.
+
+То есть сначала мы задаем возможные варианты входных параметров и возвращаемого значения, а потом указываем вариант с реализацией,
+где типы свободные.*/
 
 function add(x: string, y: string): string //задаем вариант вызова, без действий
 function add(x: number, y: number): number //задаем вариант вызова, без действий
@@ -288,11 +303,13 @@ function add(x: any, y: any): any {
     return x + y;
 }
 
-//В более новых версиях используется тип объединения
-
+//В более новых версиях используется тип объединения, который куда предпочтительнее, но он валиден лишь для одного входного параметра.
 function myMethod(a: string | number) { //a либо строка либо число.
     //some code
 }
+//Если же здесь указать 
+function myMethod(a: string | number, b: string|number): string
+//То могут комбинации строка+число в совершенно любом порядке.
 
 ------------------------------------
 
@@ -311,8 +328,8 @@ interface MyPositionWithDefault extends MyPosition {
 function position(): MyPosition //задаем вариант вызова, без действий
 function position(a: number): MyPositionWithDefault //задаем вариант вызова, без действий
 function position(a: number, b: number): MyPosition //задаем вариант вызова, без действий
-//Теперь задаем саму функцию
-function position (a?: number, b?: number) {
+//Теперь задаем саму реализацию
+function position (a?: number, b?: number): MyPosition | MyPositionDefault {
 	if (!a && !b) { //если параметры не заданы
 		return {x: undefined, y: undefined} //возвращаем параметры для интерфейса
 	}
@@ -422,6 +439,9 @@ interface User {
 	createdAt: Data
 }
 
+//Можно просто создать тип из ключей интерфейса Person
+type PersonKeys = keyof Person // 'name' | 'age'
+
 //Создадим тип данных из ключей, но исключая некоторые из них.
 type personKeysNoMeta = Exclude<keysof User, '_id' | 'createdAt'>
 //Останется только 'name', 'adress'
@@ -519,11 +539,15 @@ abstract class Figure {
 
 readonly
 //Используется как свойство-константа. При компиляции программа понимает, что 
-//данное свойство не будет перезаписываться.
+//данное свойство не будет перезаписываться. Его можно указать лишь один раз при создании объекта на основе класса.
 class NewClass {
 	readonly x: number = 3
 }
-
+//например
+class Person {
+	readonly status: string = 'person' // первый вариант
+	constructor (readonly status: string) // здесь уже в конструкторе зададим и больше не сможем менять
+}
 
 
 
