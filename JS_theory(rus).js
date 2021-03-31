@@ -1168,6 +1168,9 @@ str.match(/ab/gi)
 //Также используется в замене в строке
 str.replace(/ab/gi, replacement)
 
+//Для проверки находится ли шаблон в строке. Возвращает true или false.
+Regexp.test(str)
+
 ----------------
 
 Синтаксис RegExp
