@@ -231,9 +231,9 @@ v-bind:param="param" //in parent
 props: { param } //in child
 
 $emit('my-event', parameter) //in child
-v-on:my-event="action" //in parent
+v-on:my-event="action($event)" //in parent
 
-//Computed
+//Computed============================================================================
 computed: {
 	computedValue (value) {
 		return value.filter(v => v > 2)
@@ -242,16 +242,26 @@ computed: {
 //It's better then methods, because computed values can be cached. So application does not count them every
 //time when you use it. They are counted (computed) only when the base value is changing.
 
-//Watchers
 
-//Life circle
-beforeCreate
-created
+//Life circle============================================================================
+//Creational hooks - to GET and UPDATE DATA
+beforeCreate //before init of reactivity - can't access data. 
+created //access to data, but no access to real DOM (not rendered). Best time to AJAX
+
+//Mounting hooks (the most usable) - to RENDER and CHANGE HTML on page
 beforeMount
-mounted
-changed
-...
+mounted //access to DOM, changing HTML
 
+//Updating hooks
+beforeUpdate //on data changing but before changing DOM
+updated //after DOM has been changed
+
+//Destructing hooks
+beforeUnmount //before deleting the component from DOM (for ex in v-for directive). Best time to turn off event listeners
+unmounted //for ex to send message about destroying to server
+
+
+//========================================================================================
 //One of the main vue concepts is not to call elements directly. Use v-bind wherever you can. 
 //$refs are emergency method.
 //Another base concept is template. Use template wherever you can. DRY! (don't repeat yourself)
@@ -261,8 +271,8 @@ props: {
 	name: {
 		type: String,
 		required: true, //Makes prop mandatory
-        default: 'Tom',
-        validator: function(value) //to check value, throws an error when returns false.
+    default: 'Tom',
+    validator: function(value) //to check value, throws an error when returns false.
 	}
 }
 
