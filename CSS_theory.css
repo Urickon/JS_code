@@ -1,0 +1,73 @@
+/*=============================== Selectors ===============================*/
+
+.outer .inner /*selects all .inner elements inside .outer (at any nesting level)*/
+
+.outer > .inner /*selects all .inner elements inside .outer (but only direct descendants)*/
+
+.container * /*selects all descendants of .container*/
+
+.first + .second /*selects .second element next to .first (only neighbour)*/
+
+.first ~ .second /*selects all .second element next to .first (not only neighbours)*/
+
+a [title] /*attribute selector, selects only links with title attribute*/
+
+a [href="www.example.com"] /*precise attribute selector, selects only links with href="www.example.com"*/
+
+a [href*="goo"] /*selects all links which contain goo in their href attribute*/
+
+a [href^="http"] /*selects all links which start with http*/
+
+a [href$="com"] /*selects all links which end with com*/
+
+[data-size="large"] /*data attribute selector, selects all elements which data-attribute contains large*/
+
+[data-size] /*selects all elements with data-size attribute*/
+
+button [data-type="download"] /*precise data attribute selector, selects all buttons with download data-attribute*/
+
+
+
+/*=============================== Pseudoclasses ===============================*/
+
+:active /*when user interacts with element (moment of mousedown)*/
+:checked /*for checked checkbox, radio-buttons and selected options*/
+:first-child /*selects an element whitch is the first descendant of its parent*/
+:first-of-type /*selects first descendant of it's type between childs of parent*/
+:focus /*on focus on element*/
+:last-child /*selects the last descendant of its parent*/
+:last-of-type /*selects last descendant of it's type*/
+:not() /*selects elements which are not fitted*/
+:nth-child() /*selects child based on it's position.*/
+:nth-child(2n, odd, even, 3n+2) /*nth with additional parameters*/
+:nth-last-child() /*works as origin nth but from the end of child list*/
+
+
+
+/*=============================== Pseudoelements ===============================*/
+
+::after /*creates an element which is last descendant of target element. used only with property content*/
+/*element:hover:after{...styles} - to style pseudoelement on hover*/
+
+::before /*creates pseudoelement which is first descendant of target element*/
+
+::first-line /*selects first string of text element*/
+
+::first-letter /*selects first letter of text element*/
+
+::placeholder /*to style placeholder of input, etc.*/
+
+
+
+/*=============================== Default styles ===============================*/
+
+input::-ms-clear {display:none;}
+button::-moz-focus-inner{padding:0;border:0;}
+
+
+
+
+
+
+
+
