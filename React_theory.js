@@ -5,4 +5,6 @@
 REACT CONCEPTS (hard theory)
 
 JSX
-/*Формат, который объединяет разметку и скрипты*/
+/*Format combining data and markup.*/
+
+Hooks

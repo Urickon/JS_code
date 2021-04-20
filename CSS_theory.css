@@ -79,7 +79,7 @@ a:focus, a:active {outline: none;}
 nav, footer, header, aside {display: block;}
 input, button, textarea {font-family: inherit;}
 button {cursor: pointer;}
-a, a:hover, a: visited {text-decoration: none;}
+a, a:hover, a:visited {text-decoration: none;}
 h1,h2,h3,h4,h5,h6 {font-size: inherit; font-weight: inherit;}
 img {vertical-align: top;}
 
