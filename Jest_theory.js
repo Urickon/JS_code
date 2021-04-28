@@ -35,7 +35,7 @@ describe // grouping tests
 
 
 //===================================MATCHERS
-toBe, not.toBe // simple matcher
+toBe, not.toBe // simple matcher for primitives (use Object.is)
 
 toBeGreaterThan, toBeGreaterThanOrEqual, toBeLessThan, toBeCloseTo // ... number matchers
 
@@ -45,9 +45,21 @@ toBeNull, toUndefined, toBeTruthy, toBeFalsy // boolean matcher
 
 toContain // checks if the result contains an element
 
+toMatch // string with RegExp matcher
+
+toBeCalled, toBeCalledTimes(x) // function matchers
+
 
 //===================================Hooks
+// Нужны, чтобы не затрагивать глобальную область видимости при работе с тестами, так как для разных тестов может быть характерно изменение данных
+// из глобальной области видимости.
 beforeEach() // выполняется перед каждым тестом в своей области видимости
 afterAll () // выполняется после каждого теста (функции test())
 
 
+//===================================Asyncronous
+// There are several ways to work with asyncronous functions in Jest. You can use async/await, try/catch to catch errors, or return Promise.
+// There are also .resolves matcher and .rejects to deal with errors.
+
+
+//===================================Mocking
