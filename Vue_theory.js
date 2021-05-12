@@ -146,14 +146,14 @@ VUE NUANCES (important moments)
 How to integrate something to vue system
 /*When you need to add some tech to vue (webSocket, axios, apollo)
 First ask a question: 
-1.Does your tech need reactivity (automatically render  it's data on page)?
+1.Does your tech need reactivity (automatically render it's data on page)?
 For example axios provides data, but it is not data to render on page, first you should handle with it.
 So, the answer for axios in 'no'.
 If yes - use npm installer (for example GraphQL).
 If no ask second question:
 
 2. Can it be a visual component? 
-If yes - use vue-x or global big package (For exapmle GoogleMaps)
+If yes - use vuex or global big package (For exapmle GoogleMaps)
 If no or not sure - use pure JS to deal with it. Don't use special librares for it.*/
 
 Are you really good on vue?
@@ -171,7 +171,7 @@ master any of them, you must know when to use it (to use it's advantages) and wh
 So, we can call it 'Theory of restrictions'. Any technology has some restrictions.
 Every time think about is vue really needed or not. Vue is not a silver bullet.*/
 
-Nuances of learning (with Coursera 'learning to learn')
+Nuances of learning
 /*TDD - test driving development - its an approach to write code, when u first write it badly,
 just showing the idea. And after that u refactor it.
 The idea is that you must know how to write good code and how to write bad code.
@@ -223,8 +223,8 @@ slot
 :class = " {'myClass': x > y, 'anotherClass': x = y, ...} "
 
 //Dynamic style
-:style=" {height: `${value}`} " 
-:height="value"
+:style=" {height: `${value}px`} " 
+:height="`${value}`"
 
 //Interact between components
 v-bind:param="param" //in parent
@@ -262,11 +262,12 @@ unmounted //for ex to send message about destroying to server
 
 
 //========================================================================================
-//One of the main vue concepts is not to call elements directly. Use v-bind wherever you can. 
-//$refs are emergency method.
-//Another base concept is template. Use template wherever you can. DRY! (don't repeat yourself)
-//Make all templates reusable. Use props to send info to template wherever you can, not defined values 
-//(to make your template more multipurpose).
+/*One of the main vue concepts is not to call elements directly. Use v-bind wherever you can. 
+$refs are emergency method.
+
+Another base concept is template. Use template wherever you can. DRY! (don't repeat yourself)
+Make all templates reusable. Use props to send info to template wherever you can, dont define data in templates
+(to make your template more multipurpose).*/
 props: {
 	name: {
 		type: String,
@@ -276,7 +277,11 @@ props: {
 	}
 }
 
+//========================================================================================
+Watchers
+//
 
 
-
-
+//========================================================================================
+Custom directives
+//
