@@ -40,6 +40,11 @@ React maximizes this concept.
 */
 
 JSX
-/*Format combining data and markup.*/
+/*
+Format combining data and markup - it is a kind of synthax in JS.
+word class is reserved, so use className instead. 
+
+In JSX we have functions not markup, functions that return markup.
+*/
 
 Hooks
