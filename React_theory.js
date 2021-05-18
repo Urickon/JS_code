@@ -30,15 +30,36 @@ You can successfully create a React application without using React Create App, 
 
 Virtual DOM
 /*
-Evelution of web is decreasing markup and increasing JavaScript. 
+Evolution of web is decreasing markup and increasing JavaScript.
+Basic DOM is very slow. Virtual DOM - is a lightweight copy of basic DOM. Virtual DOM has observers that watch for data changes.
+When data was changed in virtual DOM, Application compares it with real DOM and changes it optionally, without rebuilding all the DOM.
+So, virtual DOM is a lightweight JavaScript object.
 
 In very old days browsers reloaded page every time when some new info from server was received.
-Today server just sens a JSON, and JS on the client side puts it into markup without reloading page.
+Today server just sends a JSON, and JS on the client side puts it into markup without reloading page.
 We can simply change one part of the App and keep another parts safe.
 
 Today we have a lot of JS and radically small initial HTML in our page. We have lots of logic in our site, so it is better to call it web Application.
 Site  - is an old type of data presentation
 React maximizes this concept.
+
+
+*/
+
+------------------------
+
+STYLES
+/*
+Styles in react builded application are js code too. There are no css-files that your browser receives.
+One of useful concepts of react is dynamic styles. 
+
+You can use inline styles: style={camelCaseStyle: 'css-property'}, you can use variables of type string with css-props: style={var1: var2}.
+
+You can create module style.js., then import it like object with properties. Properties will be your classes. style={importedStyle.yourClass}.
+
+You can use STYLED COMPONENTS module.
+
+You can use concept of css modules. Just use Component.module.css: import styles from './Component.module.css' className={styles.yourClass}.
 */
 
 ------------------------
@@ -52,6 +73,9 @@ In JSX we have functions not markup, functions that return markup.
 
 Component, React component - is a function that return JSX. This function can be used as a tag.
 export const Table = () => {} or <Table />
+Name of react component should start with uppercase letter (otherwise it will be a simple html tag).
+
+To use JS in JSX - {}
 */
 
 ------------------------
@@ -105,5 +129,7 @@ or import('path').then().catch()
 
 This works in scopes {} and does not need <script type="module">.
 */
+
+------------------------
 
 Hooks
