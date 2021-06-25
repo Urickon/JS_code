@@ -1427,6 +1427,15 @@ form.onsubmit = function(evt) {
 
 ----------------------------------
 
+//Получить объекта стилей элемента
+const element = document.getElementById("elemId")
+var style = window.getComputedStyle(element)
+//Возвращенный объект style - живой, меняется, когда меняются какие-либо стили.
+
+//Можно сразу получить свойство:
+var theCSSprop = window.getComputedStyle(elem,null).getPropertyValue("height")
+
+
 //Создание элемента, css
 let p = document.createElement('p')
 p.classList.add('myClass') //добавим класс
