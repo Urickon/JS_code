@@ -133,3 +133,16 @@ This works in scopes {} and does not need <script type="module">.
 ------------------------
 
 Hooks
+
+------------------------
+
+REDUX, redux/saga
+/*
+State - is the main concept. It's current data of your app.
+
+Why to keep state separately of visual data? It is a good practise to divide visual data presentation from data logic, this makes
+project more agile and scalable.
+
+Component (visual realisation) --- Action --- Store --- Reducer.
+
+*/
