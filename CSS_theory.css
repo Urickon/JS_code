@@ -1,31 +1,18 @@
 /*=============================== Selectors ===============================*/
 
 .outer .inner /*selects all .inner elements inside .outer (at any nesting level)*/
-
 .outer > .inner /*selects all .inner elements inside .outer (but only direct descendants)*/
-
 .container * /*selects all descendants of .container*/
-
 .first + .second /*selects .second element next to .first (only neighbour)*/
-
 .first ~ .second /*selects all .second element next to .first (not only neighbours)*/
-
 a [title] /*attribute selector, selects only links with title attribute*/
-
 a [href="www.example.com"] /*precise attribute selector, selects only links with href="www.example.com"*/
-
 a [href*="goo"] /*selects all links which contain goo in their href attribute*/
-
 a [href^="http"] /*selects all links which start with http*/
-
 a [href$="com"] /*selects all links which end with com*/
-
 [data-size="large"] /*data attribute selector, selects all elements which data-attribute contains large*/
-
 [data-size] /*selects all elements with data-size attribute*/
-
 button [data-type="download"] /*precise data attribute selector, selects all buttons with download data-attribute*/
-
 
 
 /*=============================== Pseudoclasses ===============================*/
@@ -48,13 +35,9 @@ button [data-type="download"] /*precise data attribute selector, selects all but
 
 ::after /*creates an element which is last descendant of target element. used only with property content*/
 /*element:hover:after{...styles} - to style pseudoelement on hover*/
-
 ::before /*creates pseudoelement which is first descendant of target element*/
-
 ::first-line /*selects first string of text element*/
-
 ::first-letter /*selects first letter of text element*/
-
 ::placeholder /*to style placeholder of input, etc.*/
 
 
@@ -82,6 +65,30 @@ button {cursor: pointer;}
 a, a:hover, a:visited {text-decoration: none;}
 h1,h2,h3,h4,h5,h6 {font-size: inherit; font-weight: inherit;}
 img {vertical-align: top;}
+
+
+
+/*=============================== Flexbox ===============================*/
+
+display: flex;
+align-items
+align-content /*works only with 2 or more rows.*/
+justify-content
+align-self
+order
+flex-direction
+flex-wrap
+flex-flow
+
+
+
+
+
+
+
+
+
+
 
 
 
