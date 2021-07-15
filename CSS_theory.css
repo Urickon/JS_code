@@ -70,15 +70,21 @@ img {vertical-align: top;}
 
 /*=============================== Flexbox ===============================*/
 
-display: flex;
-align-items
-align-content /*works only with 2 or more rows.*/
-justify-content
-align-self
-order
-flex-direction
-flex-wrap
-flex-flow
+{
+	display: flex;
+	align-items
+	align-content /*works only with 2 or more rows.*/
+	justify-content
+	align-self
+	order
+	flex-direction
+	flex-wrap
+	flex-flow
+	flex /*common*/
+	flex-grow
+	flex-shrink
+	flex-basis
+}
 
 
 
