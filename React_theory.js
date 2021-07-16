@@ -141,8 +141,32 @@ REDUX, redux/saga
 State - is the main concept. It's current data of your app.
 
 Why to keep state separately of visual data? It is a good practise to divide visual data presentation from data logic, this makes
-project more agile and scalable.
+project more agile and scalable, and easy to edit.
 
-Component (visual realisation) --- Action --- Store --- Reducer.
+Component (visual realisation, UI) ---> Action ---> Store <---> Reducer.
+Action is a layer between UI and Store, it helps bring new data to Store. Action is a simple object with required property type
+Reducer - changes Store, in other words it creates new Store. Reducer compares action data and currect state.
+It can recognize action by its type.
+There are reducers for all types of data. They can be combined in rootReducer (combineReducers).
+It has three main methods - dispatch, subscribe and getState.
 
+Dispatch - the only way to trigger state change. It takes action as an argument.
+Subscribe - adds change listeners. Adds them to subscribers array, which can be parsed with forEach and invoke all listeners,
+when something was changed.
+GetState - returns current state.
+
+rootReducer - is a function. It takes store and action as an arguments.
+
+actionCreator - is a function which creates an action.
+
+Middleware - implementation of asyncronous events for Redux.
 */
+
+------------------------
+
+HOC (high order component)
+/*
+It's a function, not a component itself. It takes component and returns container-component.
+Usual component takes props and returns JSX.
+
+Usually we replace duplicate elements and duplicate logic to the container component.
